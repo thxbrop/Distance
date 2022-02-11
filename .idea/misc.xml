@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.115" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.125" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_mic_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_music_note_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_notes_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_official_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_palette_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_prompt_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_question_mark_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_reply_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_search_white_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_security_update_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_baseline_sports_baseball_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_correct.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_edit.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_fire.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_launcher.xml" value="0.115" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.115" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_like.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_loading.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_map.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_markdown.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_netease.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_account_circle_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_arrow_back_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_arrow_back_white_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_comment_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_content_copy_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_insert_drive_file_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_insert_emoticon_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_photo_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_play_arrow_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_qr_code_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_security_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_send_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_star_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_videocam_24.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_round_volume_up_24.xml" value="0.115" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_thumbtack.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ic_triangle.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/line.xml" value="0.1495" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_account.xml" value="0.75" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_chat.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_community.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_conversation.xml" value="0.165" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_login.xml" value="0.125" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_main.xml" value="0.1625" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_settings.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/fragment_login.xml" value="0.3194444444444444" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/header_main.xml" value="0.1765625" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_chat_edit.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_header.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_settings_switch.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_info_header.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_message_record_left.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_message_record_right.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_photo.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.115" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.115" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

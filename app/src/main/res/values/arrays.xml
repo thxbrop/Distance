@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Information_Base">
+        <item>@string/information_base_username</item>
+        <item>@string/information_base_phone</item>
+        <item>@string/information_base_description</item>
+    </string-array>
+
+</resources>

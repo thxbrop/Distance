@@ -1,0 +1,193 @@
+<resources>
+    <string name="app_name">Distance</string>
+
+    <string name="menu_main_home">主页</string>
+    <string name="menu_main_notification">消息</string>
+    <string name="menu_main_contact">联系人</string>
+    <string name="menu_main_other">其它</string>
+    <string name="menu_main_share">分享</string>
+    <string name="menu_main_about_us">关于我们</string>
+    <string name="menu_main_music">音乐</string>
+    <string name="menu_main_test">测试</string>
+
+    <string name="cd_create_conversation">创建会话</string>
+    <string name="cd_create_conversation_dialog_title">选择一个用户</string>
+    <string name="cd_more">更多</string>
+    <string name="cd_send">发送</string>
+    <string name="cd_edit">编辑</string>
+    <string name="cd_call">通话</string>
+    <string name="cd_copy">复制</string>
+    <string name="cd_copy_link">复制链接</string>
+    <string name="cd_share">分享</string>
+    <string name="cd_headView">头像</string>
+    <string name="cd_search">搜索</string>
+
+    <string name="unLog">未登录</string>
+    <string name="image_message">[图片消息]</string>
+    <string name="audio_message">[语音消息]</string>
+    <string name="unKnow_message">[未知消息]</string>
+    <string name="unKnow_phone_number">[手机信息已隐藏]</string>
+    <string name="error_user_unfounded">用户不存在</string>
+    <string name="doubleBackPress">再按一次退出</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone_number">手机号码</string>
+    <string name="phone_number_visibility">谁可以查看我的手机号码</string>
+    <string name="everyone">所有人</string>
+    <string name="no_one">禁止所有人</string>
+    <string name="only_contract">仅限联系人</string>
+    <string name="no_phone_number">[未知手机号码]</string>
+    <string name="wrong_phone_number">手机号码格式错误</string>
+    <string name="password">密码</string>
+    <string name="login_netnease">登录网易云账号</string>
+    <string name="login_app">手机号登录</string>
+    <string name="login">登录</string>
+    <string name="sign">注册</string>
+    <string name="uid">UID</string>
+    <string name="send">发送</string>
+    <string name="hint_type_here">在此键入消息</string>
+    <string name="clip">clip</string>
+    <string name="error_request_permission">没有所需的权限无法启动</string>
+    <string name="error_no_network">无网络连接</string>
+    <string name="connecting">连接中…</string>
+    <string name="add">添加</string>
+    <string name="friend">联系人</string>
+    <string name="add_friend">申请添加好友</string>
+    <string name="request">好友申请</string>
+    <string name="pending_friend_request">等待回应</string>
+    <string name="pending_friend_request_assets">跳转到好友申请界面回应</string>
+    <string name="pending_friend_request_another">等待对方回应</string>
+    <string name="accepted_friend_request">已添加为好友</string>
+    <string name="accept_friend_request">同意好友申请</string>
+    <string name="declined_friend_request">已拒绝好友申请</string>
+    <string name="decline_friend_request">拒绝好友申请</string>
+    <string name="overtime_friend_request">信息加载失败</string>
+
+    <string name="def_value">--</string>
+
+    <string name="information">信息</string>
+    <string name="help">求助</string>
+    <string name="photo">图片</string>
+    <string name="voice">语音</string>
+    <string name="location">定位</string>
+    <string name="music">音乐</string>
+    <string name="video">视频</string>
+    <string name="document">文件</string>
+
+    <string name="delete">删除</string>
+
+    <string name="upload_headPicture">上传进度:%d %%</string>
+    <string name="take_picture">拍照</string>
+    <string name="select_picture">从手机相册选择</string>
+    <string name="big_picture">查看原图</string>
+    <string name="history_pictures">查看历史头像</string>
+    <string name="account">账号</string>
+    <string name="correct">确认</string>
+    <string name="username">用户名</string>
+    <string name="empty_username">[未设置用户名]</string>
+    <string name="edit_name">编辑名称</string>
+    <string name="edit_description">个人简介</string>
+    <string name="no_description">[该用户未设置个人简介]</string>
+    <string name="edit_id">用户名称</string>
+    <string name="edit_phone">修改手机号码</string>
+    <string name="copy_success">已复制到剪贴板</string>
+    <string name="copy_failure">复制失败</string>
+    <string name="save_success">已保存到相册</string>
+    <string name="save_failed">保存失败</string>
+
+    <string name="information_base_username">用户名称</string>
+    <string name="information_base_phone">点击更换手机号码</string>
+    <string name="information_base_description">个人简介</string>
+
+    <string name="dialog_notify_position_button">知道了</string>
+    <string name="dialog_callback_position_button">确定</string>
+    <string name="dialog_callback_negative_button">取消</string>
+
+    <string name="sign_success">注册成功</string>
+    <string name="error_211">用户不存在</string>
+    <string name="error_403">缺少权限</string>
+    <string name="group_subtitle">创建者：%s</string>
+
+    <string name="fresh_to_initList">刷新列表获取历史会话</string>
+    <string name="fresh_time_out">列表刷新超时</string>
+
+    <string name="setting">设置</string>
+    <string name="setting_notify">通知与声音</string>
+    <string name="setting_notify_shock">振动</string>
+    <string name="setting_notify_ring">铃声</string>
+    <string name="setting_notify_repeat">重复通知</string>
+    <string name="setting_notify_repeat_never">从不</string>
+    <string name="setting_notify_repeat_5min">5分钟</string>
+    <string name="setting_notify_repeat_10min">10分钟</string>
+    <string name="setting_notify_repeat_30min">30分钟</string>
+    <string name="setting_notify_repeat_1hour">1小时</string>
+    <string name="setting_notify_repeat_2hour">2小时</string>
+    <string name="setting_notify_repeat_4hour">4小时</string>
+    <string name="scan_qr_code">扫码</string>
+    <string name="qr_code">二维码</string>
+
+    <string name="online_now">在线</string>
+    <string name="online_never">很久之前上线过</string>
+    <string name="cd_moving_background">动态背景</string>
+    <string name="cd_icon">图标</string>
+    <string name="cd_map">地图</string>
+
+    <string name="photo_show_dialog_text">%d/%d</string>
+    <string name="setting_safe">隐私和安全</string>
+    <string name="setting_theme">对话与主题</string>
+    <string name="setting_cache">媒体缓存管理</string>
+    <string name="setting_logout">登出当前账户</string>
+    <string name="unbanned_then_accept">从黑名单中移除并同意好友申请</string>
+    <string name="cd_save">保存</string>
+    <string name="try_again">请再试一次</string>
+    <string name="menu_main_notes">便笺</string>
+    <string name="start_chat">发起会话</string>
+
+    <string name="conversation_empty">不存在的频道</string>
+    <string name="conversation_private">私人频道</string>
+    <string name="conversation_pair">双人聊天室</string>
+    <string name="conversation_circle">多人聊天室</string>
+    <string name="community">社区</string>
+    <string name="cd_create_issues">创建动态</string>
+    <string name="emoji">emoji</string>
+    <string name="make_voice">开始录音</string>
+    <string name="stop_voice">结束录音</string>
+    <string name="sending_voice">发送中</string>
+
+    <string name="invite_permission">谁可以邀请我加入群聊</string>
+    <string name="no_invite_permission">该用户拒绝被邀请加入群聊</string>
+    <string name="no_permission">缺少权限</string>
+
+    <string name="colorPrimary">主题色</string>
+
+    <string name="cache_image">图片</string>
+    <string name="cache_conversation">会话</string>
+    <string name="cache_message">聊天记录</string>
+    <string name="cache_voice">语音消息</string>
+    <string name="expansion">扩展</string>
+    <string name="list_max_speed">列表最大滑动速度</string>
+    <string name="cd_flash_light">闪光灯</string>
+    <string name="dialog_voice_text">单击退出，长按录音</string>
+    <string name="cd_update">获取更新</string>
+    <string name="invited_agreed">同意邀请</string>
+    <string name="creator">创建者</string>
+    <string name="submit">提交</string>
+    <string name="cd_submit">提交</string>
+    <string name="error_getConversations">会话拉取失败</string>
+    <string name="error_getConversation">会话查询失败或不存在</string>
+    <string name="client_error">网络连接已断开</string>
+    <string name="error_getMessages">聊天记录拉取失败</string>
+    <string name="error_sendMessage">发送失败</string>
+    <string name="notification_keep_alive">后台保活进程</string>
+    <string name="notification_keep_alive_text">运行中</string>
+    <string name="error_login">登录失败</string>
+    <string name="email">E-mail</string>
+    <string name="error_other">未知错误</string>
+    <string name="login_success">注册成功</string>
+    <string name="task_success">任务完成</string>
+    <string name="error_task">任务失败</string>
+
+    <!--Only for test-->
+    <string name="long_text">
+        afhaiofhaidofhioadfhioadhfoiadhfiahaifhoiahfiahfioahfahfhafihaoifhaiohfafhalfhaiofhaofgaiofgaiofg
+    </string>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nav_header_height">128dp</dimen>
+    <dimen name="nav_item_horizontal_padding">24dp</dimen>
+    <dimen name="nav_item_background_corner_radius_left">0dp</dimen>
+    <dimen name="nav_item_background_corner_radius_right">100dp</dimen>
+    <dimen name="nav_item_background_corner_radius_left_sq">4dp</dimen>
+    <dimen name="nav_item_background_corner_radius_right_sq">4dp</dimen>
+    <dimen name="nav_item_background_inset_left">0dp</dimen>
+    <dimen name="nav_item_background_inset_right">8dp</dimen>
+    <dimen name="nav_item_background_inset_left_sq">8dp</dimen>
+    <dimen name="nav_item_background_inset_right_sq">8dp</dimen>
+    <dimen name="nav_item_background_inset_top_sq">4dp</dimen>
+    <dimen name="nav_item_background_inset_bottom_sq">4dp</dimen>
+    <dimen name="nav_item_background_inset_default">0dp</dimen>
+    <dimen name="nav_item_background_inset_right_default">4dp</dimen>
+    <dimen name="nav_item_background_radius_default">1dp</dimen>
+    <dimen name="my_default_peek_height">200dp</dimen>
+
+    <dimen name="margin_xs">4dp</dimen>
+    <dimen name="margin_s">8dp</dimen>
+    <dimen name="margin_m">12dp</dimen>
+    <dimen name="margin_l">16dp</dimen>
+    <dimen name="margin_xl">24dp</dimen>
+    <dimen name="margin_2xl">30dp</dimen>
+    <dimen name="margin_3xl">45dp</dimen>
+    <dimen name="font_xs">10sp</dimen>
+    <dimen name="font_s">12sp</dimen>
+    <dimen name="font_m">14sp</dimen>
+    <dimen name="font_l">16sp</dimen>
+    <dimen name="font_xl">18sp</dimen>
+    <dimen name="font_2xl">22sp</dimen>
+    <dimen name="font_3xl">26sp</dimen>
+
+    <dimen name="emoji_size_default">20sp</dimen>
+    <dimen name="emoji_size_only_emojis">40sp</dimen>
+    <dimen name="emoji_size_single_emoji">60sp</dimen>
+
+</resources>

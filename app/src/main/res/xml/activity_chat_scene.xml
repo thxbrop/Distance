@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="400"
+        motion:motionInterpolator="easeInOut">
+        <KeyFrameSet />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start" />
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/menu_list"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:elevation="@dimen/margin_m"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="@id/card"
+            motion:layout_constraintStart_toStartOf="@id/card"
+            motion:layout_constraintTop_toBottomOf="@id/card" />
+        <Constraint
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:elevation="@dimen/margin_m"
+            motion:layout_constraintBottom_toTopOf="@id/menu_list"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/activity_chat_recyclerview" />
+        <Constraint
+            android:id="@+id/emoji_list"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:background="@color/background"
+            android:elevation="@dimen/margin_m"
+            android:overScrollMode="never"
+            android:paddingTop="12dp"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="@id/card"
+            motion:layout_constraintStart_toStartOf="@id/card"
+            motion:layout_constraintTop_toBottomOf="@id/card" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/emoji_end">
+
+        <Constraint
+            android:id="@+id/menu_list"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:elevation="@dimen/margin_m"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="@id/card"
+            motion:layout_constraintStart_toStartOf="@id/card"
+            motion:layout_constraintTop_toBottomOf="@id/card" />
+        <Constraint
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:elevation="@dimen/margin_m"
+            motion:layout_constraintBottom_toTopOf="@id/emoji_list"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/activity_chat_recyclerview" />
+        <Constraint
+            android:id="@+id/emoji_list"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:background="@color/background"
+            android:elevation="@dimen/margin_m"
+            android:overScrollMode="never"
+            android:paddingTop="12dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="@id/card"
+            motion:layout_constraintStart_toStartOf="@id/card"
+            motion:layout_constraintTop_toBottomOf="@id/card" />
+
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetEnd="@+id/emoji_end"
+        motion:constraintSetStart="@+id/start"
+        motion:motionInterpolator="easeInOut" />
+</MotionScene>

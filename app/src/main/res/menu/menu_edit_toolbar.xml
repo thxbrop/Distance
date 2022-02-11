@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="tool_bar">
+
+    <item
+        android:id="@+id/menu_edit_toolbar_correct"
+        android:icon="@drawable/ic_correct"
+        android:title="@string/correct"
+        app:showAsAction="always" />
+
+</menu>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "154071966678",
+    "project_id": "distance-c5cbe",
+    "storage_bucket": "distance-c5cbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154071966678:android:3f0aa545acde46ae5a3a77",
+        "android_client_info": {
+          "package_name": "com.unltm.distance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154071966678-7kf9ght7s16j4mv0d5inav2ih3npn0db.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVtNEUP3zzUEbQht037IluAEeuRe8jgko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154071966678-7kf9ght7s16j4mv0d5inav2ih3npn0db.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="id_message_headPicture" type="id" />
+    <item name="id_message_username" type="id" />
+    <item name="id_issue_editor_text" type="id" />
+    <item name="id_issue_editor_edittext" type="id" />
+    <item name="id_issue_editor_markdown" type="id" />
+    <item name="id_issue_editor_submit" type="id" />
+</resources>

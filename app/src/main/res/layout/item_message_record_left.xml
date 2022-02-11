@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/background_chat_view_another"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="64dp">
+
+            <com.unltm.distance.ui.components.wave.AXWaveView
+                android:id="@+id/wave"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:circle="true"
+                app:circle_radius="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shader_color_1="@color/colorPrimary"
+                app:shader_color_2="@color/colorPrimaryDeep_chat" />
+
+            <ImageView
+                android:id="@+id/play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_round_play_arrow_24"
+                app:layout_constraintBottom_toBottomOf="@id/wave"
+                app:layout_constraintEnd_toEndOf="@id/wave"
+                app:layout_constraintStart_toStartOf="@id/wave"
+                app:layout_constraintTop_toTopOf="@id/wave"
+                app:tint="@color/white"
+                android:contentDescription="TODO" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_m"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="4dp"
+                android:includeFontPadding="false"
+                android:text="@string/def_value"
+                android:textColor="@color/secondary_text_chat_view_another"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/wave" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_message_copy"
+        android:icon="@drawable/ic_round_content_copy_24"
+        android:title="@string/cd_copy" />
+</menu>

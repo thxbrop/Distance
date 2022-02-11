@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_user_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/activity_user_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/cd_headView"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="w,3:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCornerImageStyle_0"
+            tools:srcCompat="@color/colorPrimary" />
+
+        <com.unltm.distance.components.ceil.LoadingProgress
+            android:id="@+id/loadingProgress"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/activity_user_image"
+            app:layout_constraintEnd_toEndOf="@id/activity_user_image"
+            app:layout_constraintStart_toStartOf="@id/activity_user_image"
+            app:layout_constraintTop_toTopOf="@id/activity_user_image" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/activity_user_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_user_header">
+
+        <include
+            android:id="@+id/activity_user_name"
+            layout="@layout/item_info_header" />
+
+        <include
+            android:id="@+id/activity_user_phone"
+            layout="@layout/item_info" />
+
+        <include
+            android:id="@+id/activity_user_description"
+            layout="@layout/item_info" />
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_user_floating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_2xl"
+        android:contentDescription="@string/cd_create_conversation"
+        android:src="@drawable/ic_baseline_chat_24"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="0dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toTopOf="@id/activity_user_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_user_header"
+        app:tint="@color/background" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

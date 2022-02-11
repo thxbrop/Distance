@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#687b98</color>
+    <color name="floating_background">@color/colorPrimaryDeep_chat</color>
+    <color name="colorPrimaryText">#536a89</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="snow_white">#f9f7f7</color>
+    <color name="background">@color/white</color>
+    <color name="thumb">#474e5a</color>
+    <color name="track">#758195</color>
+    <color name="tint_gray_chat">#999999</color>
+    <color name="backgroundSecondary">#F0F0F0</color>
+    <color name="toolbar">#282b32</color>
+    <color name="navigation">#16181c</color>
+    <color name="toolbar_text">@color/white</color>
+    <color name="gray">#191919</color>
+    <color name="gray_trans">#59393E46</color>
+    <color name="grey">#0A0A0A</color>
+    <color name="green_blue">#00adb5</color>
+    <color name="red">#ca5756</color>
+    <color name="blue_800">#112d4e</color>
+    <color name="blue_400">#3f72af</color>
+    <color name="blue_200">#dbe2ef</color>
+    <color name="blue">#4ea5df</color>
+    <color name="textColor">@color/grey</color>
+    <color name="titleTextColor">#222222</color>
+    <color name="secondaryTextColor">#8c8e8f</color>
+    <color name="tint">#c6c7c9</color>
+    <color name="blue_light">#72A4FF</color>
+    <color name="purple_light">#8B72FF</color>
+    <color name="yellow">#c9a43e</color>
+    <color name="deep_yellow">#ccbc2f</color>
+    <color name="hint">#78909C</color>
+    <color name="dark_stroke_color">#89000000</color>
+    <color name="divider">#efefef</color>
+    <color name="pressed">#f1f1f1</color>
+    <color name="widget_name">#212121</color>
+    <color name="widget_badge">#ffffff</color>
+    <color name="widget_time">#96999C</color>
+    <color name="widget_text">#8B8D8F</color>
+    <color name="widget_divider">#d9d9d9</color>
+    <color name="widget_action_text">#8B8D8F</color>
+    <color name="widget_edit_text">#999999</color>
+    <color name="green">#55bb6d</color>
+    <color name="purple">#463268</color>
+    <color name="orange">#f08a5d</color>
+    <color name="navigation_header_background">@color/colorPrimary</color>
+    <color name="info_card_bg">@color/background</color>
+
+    <color name="background_chat_view_another">#F0F0F0</color>
+    <color name="background_chat_view_own">#eaeff7</color>
+    <color name="text_chat_view_another">#000000</color>
+    <color name="secondary_text_chat_view_another">#737579</color>
+    <color name="secondary_text_chat_view_own">#737579</color>
+    <color name="background_chat">#758195</color>
+    <color name="colorPrimary_chat">#687b98</color>
+    <color name="colorPrimaryDeep_chat">#647691</color>
+
+    <color name="seekbar">#fb5855</color>
+
+    <color name="widget_ratio_regulator_dialog">@color/white</color>
+    <color name="widget_ratio_regulator_dialog_smoke">@color/toolbar</color>
+    <color name="widget_ratio_regulator_text">#212a33</color>
+</resources>
