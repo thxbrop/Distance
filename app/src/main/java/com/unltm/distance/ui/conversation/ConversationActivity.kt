@@ -6,17 +6,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextSwitcher
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.imageview.ShapeableImageView
 import com.unltm.distance.R
 import com.unltm.distance.base.collection.Launchers
 import com.unltm.distance.base.contracts.setTextColorResource
-import com.unltm.distance.base.contracts.sp
 import com.unltm.distance.base.contracts.startActivity
 import com.unltm.distance.databinding.ActivityConversationBinding
 import com.unltm.distance.room.entity.User
 import com.unltm.distance.ui.account.AccountActivity
+import com.unltm.distance.ui.live.reco.RecoActivity
 import com.unltm.distance.ui.login.LoginActivity
 
 class ConversationActivity : AppCompatActivity() {
@@ -42,11 +43,19 @@ class ConversationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityConversationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ConversationViewModel.getInstance()
+        viewModel = ConversationViewModel.INSTANCE
         requestPermissions = Launchers.requestPermissionsLauncher(this)
         binding.init()
+        initBase()
         initObserver()
         initOnClickListener()
+    }
+
+    private fun initBase() {
+        onBackPressedDispatcher.addCallback {
+            if (binding.root.isOpen) binding.root.close()
+            else finish()
+        }
     }
 
     private fun initObserver() {
@@ -73,6 +82,14 @@ class ConversationActivity : AppCompatActivity() {
             headerView = it.getHeaderView(0)
             headImageView = headerView.findViewById(R.id.imageView)
             usernameTextView = headerView.findViewById(R.id.textView)
+            it.setNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.menu_main_navigation_live -> {
+                        startActivity<RecoActivity>()
+                    }
+                }
+                false
+            }
         }
         activityMainToolbar.setNavigationOnClickListener { root.open() }
         textSwitcher = activityMainTextSwitcher.apply {
@@ -86,9 +103,6 @@ class ConversationActivity : AppCompatActivity() {
             setCurrentText(getString(R.string.app_name))
         }
 
-        ratio.setOnProgressChangeListener {
-
-        }
     }
 
     private fun initOnClickListener() {

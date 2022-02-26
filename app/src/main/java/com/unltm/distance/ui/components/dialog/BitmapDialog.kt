@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import coil.load
 import com.unltm.distance.R
-import com.unltm.distance.adapter.BottomSheetAdapter
+import com.unltm.distance.adapter.bottomsheet.SettingItem
 import com.unltm.distance.base.contracts.showToast
-import com.unltm.distance.fragment.ListBottomSheet
-import com.unltm.distance.ui.components.photoview.PhotoView
 import com.unltm.distance.base.file.FileUtils
+import com.unltm.distance.fragment.listbottomsheet.ListBottomSheet
+import com.unltm.distance.ui.components.photoview.PhotoView
 
 class BitmapDialog(
     context: Context,
@@ -51,18 +51,18 @@ class BitmapDialog(
                     ListBottomSheet(
                         "图片预览",
                         listOf(
-                            BottomSheetAdapter.Setting(
+                            SettingItem(
                                 R.drawable.ic_baseline_save_24,
                                 R.string.cd_save
                             ) {
                                 val icon: Int
                                 src[position]?.let {
-                                    val textId = if (FileUtils.saveBitmap2Gallery(context, it)) {
+                                    val textId = if (FileUtils.saveImage(it)) {
                                         icon = R.drawable.live_state_primary
-                                        R.string.save_success
+                                        R.string.success_save
                                     } else {
                                         icon = R.drawable.live_state_warn
-                                        R.string.save_failed
+                                        R.string.error_save
                                     }
                                     context.showToast(textId, icon)
                                 }

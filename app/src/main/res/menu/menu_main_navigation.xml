@@ -20,6 +20,11 @@
             android:icon="@drawable/ic_baseline_sports_baseball_24"
             android:title="@string/community" />
         <item
+            android:id="@+id/menu_main_navigation_live"
+            android:checkable="false"
+            android:icon="@drawable/ic_round_smart_display_24"
+            android:title="@string/live" />
+        <item
             android:id="@+id/menu_main_navigation_request"
             android:checkable="false"
             android:icon="@drawable/ic_baseline_checklist_24"

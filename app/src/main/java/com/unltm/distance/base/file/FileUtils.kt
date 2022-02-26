@@ -3,10 +3,16 @@ package com.unltm.distance.base.file
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
+import androidx.annotation.RequiresApi
 import com.unltm.distance.application
+import com.unltm.distance.base.contracts.isNotNull
 import com.unltm.distance.base.contracts.requireSdk
+import java.io.File
+import java.io.FileOutputStream
 import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -52,7 +58,43 @@ object FileUtils {
     @JvmStatic
     val CrashPath = "$CachePath/Crash"
 
-    fun saveBitmap2Gallery(
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun saveImageInQ(bitmap: Bitmap): Boolean = run {
+        val filename = "IMG_${System.currentTimeMillis()}.jpg"
+        var fos: OutputStream?
+        var imageUri: Uri?
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            put(MediaStore.Video.Media.IS_PENDING, 1)
+        }
+        val contentResolver = application.contentResolver
+        contentResolver.also { resolver ->
+            imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            fos = imageUri?.let { resolver.openOutputStream(it) }
+        }
+        fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 70, it) }
+        contentValues.clear()
+        contentValues.put(MediaStore.Video.Media.IS_PENDING, 0)
+        imageUri?.also { contentResolver.update(it, contentValues, null, null) }.isNotNull
+    }
+
+    private fun saveImageLegacy(bitmap: Bitmap) = run {
+        val filename = "IMG_${System.currentTimeMillis()}.jpg"
+        val imagesDir =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        val image = File(imagesDir, filename)
+        val fos = FileOutputStream(image)
+        fos.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
+    }
+
+    fun saveImage(bitmap: Bitmap): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) saveImageInQ(bitmap)
+        else saveImageLegacy(bitmap)
+    }
+
+    fun saveImageLegacy(
         context: Context,
         bitmap: Bitmap,
         title: String = "Distance",
@@ -79,11 +121,26 @@ object FileUtils {
         })
     }
 
-    private fun download(url: String, os: OutputStream): Boolean {
+    sealed class RequestMethod(val value: String) {
+        object GET : RequestMethod("GET")
+        object POST : RequestMethod("POST")
+        object HEAD : RequestMethod("HEAD")
+        object OPTIONS : RequestMethod("OPTIONS")
+        object PUT : RequestMethod("PUT")
+        object DELETE : RequestMethod("DELETE")
+        object TRACE : RequestMethod("TRACE")
+    }
+
+    fun download(
+        url: String,
+        os: OutputStream,
+        requestMethod: RequestMethod = RequestMethod.GET,
+        connectionTimeout: Int = 5_000
+    ): Boolean {
         val urls = URL(url)
         (urls.openConnection() as HttpURLConnection).also { conn ->
-            conn.requestMethod = "GET"
-            conn.connectTimeout = 5 * 1000
+            conn.requestMethod = requestMethod.value
+            conn.connectTimeout = connectionTimeout
             return if (conn.responseCode == 200) {
                 conn.inputStream.use { ins ->
                     val buf = ByteArray(2048)

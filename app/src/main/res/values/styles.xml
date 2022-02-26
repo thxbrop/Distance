@@ -45,6 +45,11 @@
         <item name="cornerSize">25%</item>
     </style>
 
+    <style name="roundedCornerImageStyle_25">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12.5%</item>
+    </style>
+
     <style name="roundedCornerImageStyle_0">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">0%</item>

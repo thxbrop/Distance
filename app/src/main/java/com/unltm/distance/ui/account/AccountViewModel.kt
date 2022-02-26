@@ -1,33 +1,33 @@
 package com.unltm.distance.ui.account
 
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.storage.UploadTask
-import com.unltm.distance.base.contracts.isNull
-import com.unltm.distance.base.file.FileType
-import com.unltm.distance.datasource.FileDataSource
-import com.unltm.distance.storage.AuthStorage
-import com.unltm.distance.ui.conversation.AccountNotExistException
+import com.unltm.distance.repository.AccountRepository
+import com.unltm.distance.room.entity.User
+import com.unltm.distance.room.entity.UserRich
+import com.unltm.distance.ui.conversation.exception.AccountNotExistException
 import com.unltm.distance.ui.conversation.result.GetCurrentUser
+import com.unltm.distance.ui.login.result.GetRichUserResult
 import kotlinx.coroutines.launch
 
 class AccountViewModel private constructor(
-    private val authStorage: AuthStorage,
-    private val fileDataSource: FileDataSource
+    private val accountRepository: AccountRepository
 ) : ViewModel() {
     private var _currentUserLive = MutableLiveData<GetCurrentUser>()
     val currentUserLive: LiveData<GetCurrentUser> = _currentUserLive
 
-    private var _uploadHeadPictureLive = MutableLiveData<UploadTask>()
-    val uploadHeadPictureLive: LiveData<UploadTask> = _uploadHeadPictureLive
+//    private var _uploadHeadPictureLive = MutableLiveData<UploadTask>()
+//    val uploadHeadPictureLive: LiveData<UploadTask> = _uploadHeadPictureLive
+
+    private var _richInfoLive = MutableLiveData<GetRichUserResult>()
+    val richUserResult: LiveData<GetRichUserResult> = _richInfoLive
 
     fun getCurrentUser() {
         viewModelScope.launch {
-            val allAccount = authStorage.getAllAccount()
+            val allAccount = accountRepository.getCurrentUser()
             _currentUserLive.value = if (allAccount.isEmpty()) {
                 GetCurrentUser(error = AccountNotExistException())
             } else {
@@ -36,24 +36,26 @@ class AccountViewModel private constructor(
         }
     }
 
-    fun uploadHeadPicture(file: Uri) {
-        _uploadHeadPictureLive.value = fileDataSource.upload(file, FileType.Pictures)
+    fun getRichInfo(user: User) {
+        viewModelScope.launch {
+            _richInfoLive.value = accountRepository.getRichInfo(user)
+        }
+    }
+
+    fun updateRichInfo(userRich: UserRich) {
+        _richInfoLive.value = GetRichUserResult(success = userRich)
     }
 
     fun uploadHeadPicture(bitmap: Bitmap) {
-        _uploadHeadPictureLive.value = fileDataSource.upload(bitmap)
+        //_uploadHeadPictureLive.value = fileDataSource.upload(bitmap)
+        TODO()
     }
 
     companion object {
-        private var INSTANCE: AccountViewModel? = null
-        fun getInstance() = run {
-            if (INSTANCE.isNull) {
-                INSTANCE = AccountViewModel(
-                    authStorage = AuthStorage(),
-                    fileDataSource = FileDataSource()
-                )
-            }
-            INSTANCE!!
+        val INSTANCE by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+            AccountViewModel(
+                accountRepository = AccountRepository.INSTANCE
+            )
         }
     }
 }

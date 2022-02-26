@@ -76,6 +76,11 @@
                 tools:ignore="DuplicateIncludedIds" />
 
             <include
+                android:id="@+id/activity_account_proxy"
+                layout="@layout/item_setting_info"
+                tools:ignore="DuplicateIncludedIds" />
+
+            <include
                 android:id="@+id/activity_account_logout"
                 layout="@layout/item_setting_info_footer"
                 tools:ignore="DuplicateIncludedIds" />
@@ -89,8 +94,8 @@
             android:contentDescription="@string/cd_edit"
             android:src="@drawable/ic_baseline_edit_24"
             app:backgroundTint="@color/colorPrimary"
-            app:elevation="0dp"
             app:borderWidth="4dp"
+            app:elevation="0dp"
             app:fabSize="auto"
             app:layout_constraintBottom_toTopOf="@id/activity_user_list"
             app:layout_constraintEnd_toEndOf="parent"

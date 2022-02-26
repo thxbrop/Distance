@@ -5,5 +5,5 @@ import androidx.annotation.IntRange
 interface OnDownloadListener {
     fun onSuccess()
     fun onFailed(throwable: Throwable)
-    fun onDownloading(@IntRange(from = 0, to = 100) progress: Int)
+    fun onProcess(@IntRange(from = 0, to = 100) progress: Int)
 }

@@ -24,7 +24,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Information">
+        android:theme="@style/Theme.Information"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -45,6 +46,9 @@
             android:name=".ui.account.AccountActivity"
             android:theme="@style/Theme.Information" />
         <activity android:name=".ui.settings.SettingActivity" />
+        <activity android:name=".ui.live.reco.RecoActivity" />
+        <activity android:name=".ui.live.player.PlayerActivity" />
+        <activity android:name=".ui.edit.EditActivity" />
     </application>
 
 </manifest>
