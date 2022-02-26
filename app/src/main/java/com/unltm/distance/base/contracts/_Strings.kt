@@ -10,3 +10,8 @@ fun String?.toHttps(): String? {
         else -> null
     }
 }
+
+fun String?.isPhoneNumber(): Boolean {
+    if (this == null) return false
+    return length == 11
+}

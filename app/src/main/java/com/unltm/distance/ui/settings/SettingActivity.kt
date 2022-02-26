@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.setMargins
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import coil.util.CoilUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,15 +17,26 @@ import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrInterface
 import com.unltm.distance.R
 import com.unltm.distance.base.contracts.*
-import com.unltm.distance.components.dialog.ProgressDialog
-import com.unltm.distance.databinding.ActivitySettingsBinding
-import com.unltm.distance.ui.components.dialog.LoadingDialog
 import com.unltm.distance.base.file.FileUtils
+import com.unltm.distance.databinding.ActivitySettingsBinding
+import com.unltm.distance.datasource.config.BaseConfig
+import com.unltm.distance.ui.components.dialog.LoadingDialog
+import com.unltm.distance.ui.components.dialog.ProgressDialog
+import com.unltm.distance.ui.settings.components.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.Cache
 import java.text.DecimalFormat
+
+const val SETTING_FORK = "setting_fork"
+const val SETTING_RING = "ring"
+const val SETTING_VIBRATION = "vibration"
+const val SETTING_THEME_LIST_MAX_SPEED = "list_max_speed"
+
+const val SETTING_PROXY_ADDRESS = "setting_proxy_address"
+const val SETTING_PROXY_PORT = "setting_proxy_port"
 
 class SettingActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
@@ -45,7 +57,33 @@ class SettingActivity : AppCompatActivity() {
             is Fork.PrivacySafe -> initPrivacySafe()
             is Fork.Theme -> initTheme()
             is Fork.Cache -> initCache()
+            is Fork.Proxy -> initProxy()
             is Fork.Unknown -> onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun initProxy() {
+        binding.run {
+            appBarLayout.initAppBar(R.string.setting_proxy, onBackPressedDispatcher)
+            val addressSetting =
+                EditTextSetting(linear, R.string.setting_proxy_address) { address ->
+                    BaseConfig.address = address
+                }
+            val portSetting = EditTextSetting(linear, R.string.setting_proxy_port) { port ->
+                BaseConfig.port = port
+            }
+            addressSetting.setText(BaseConfig.address)
+            portSetting.setText(BaseConfig.port)
+            lifecycleScope.launch {
+                dataStoreSetting.getValueFlow(
+                    stringPreferencesKey(SETTING_PROXY_PORT),
+                    BaseConfig.port
+                ).collectLatest {
+                    withContext(Dispatchers.Main) {
+                        portSetting.setText(it)
+                    }
+                }
+            }
         }
     }
 
@@ -261,6 +299,24 @@ class SettingActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cache?.close()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (fork is Fork.Proxy) {
+            lifecycleScope.launch {
+                dataStoreSetting.setValue(
+                    stringPreferencesKey(SETTING_PROXY_ADDRESS),
+                    BaseConfig.address
+                )
+            }
+            lifecycleScope.launch {
+                dataStoreSetting.setValue(
+                    stringPreferencesKey(SETTING_PROXY_PORT),
+                    BaseConfig.port
+                )
+            }
+        }
     }
 
 }

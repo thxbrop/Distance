@@ -10,15 +10,17 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class ProgramSplitter(private val context: Context) {
-    private var accountRepository: AccountRepository = AccountRepository.getInstance()
+    private var accountRepository: AccountRepository = AccountRepository.INSTANCE
 
     init {
         MainScope().launch {
             val currentUser = accountRepository.getCurrentUser()
             if (currentUser.isNullOrEmpty()) context.startActivity<LoginActivity>()
-            else context.startActivity<ConversationActivity>()
-            (context as Activity).finish()
+            else {
+                context.startActivity<ConversationActivity>()
+                (context as Activity).finish()
+            }
         }
-    }
 
+    }
 }

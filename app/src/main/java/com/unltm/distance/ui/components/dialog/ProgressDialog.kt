@@ -1,4 +1,4 @@
-package com.unltm.distance.components.dialog
+package com.unltm.distance.ui.components.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -30,6 +30,14 @@ class ProgressDialog(private val fragmentActivity: FragmentActivity) :
 
     fun submit(progress: Int) {
         liveData.postValue(progress)
+    }
+
+    override fun show() {
+        if (!isShowing) super.show()
+    }
+
+    override fun dismiss() {
+        if (isShowing) super.dismiss()
     }
 
 }

@@ -1,7 +1,9 @@
 package com.unltm.distance.base.contracts
 
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.Rect
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +12,17 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import coil.ImageLoader
 import coil.imageLoader
 import coil.load
 import coil.request.ImageRequest
+import com.unltm.distance.application
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.math.max
 
 fun RecyclerView.closeRecyclerViewAnimation() {
@@ -28,12 +35,13 @@ fun RecyclerView.closeRecyclerViewAnimation() {
 }
 
 fun RecyclerView.setMaxFlingVelocity(velocity: Int = 8000) {
+    if (velocity == 8000) return
     try {
         val field = javaClass.getDeclaredField("mMaxFlingVelocity")
         field.isAccessible = true
         field.set(this, velocity)
     } catch (e: Exception) {
-        e.printStackTrace()
+        Log.e("_Widgets", "setMaxFlingVelocity: ", e)
     }
 }
 
@@ -61,6 +69,15 @@ fun ImageView.loadHTTPS(
     builder: ImageRequest.Builder.() -> Unit = {}
 ) = load(uri.toHttps(), imageLoader, builder)
 
+suspend fun String.toBitmap() = suspendCancellableCoroutine<Bitmap> { coroutine ->
+    try {
+        ImageRequest.Builder(application).data(this).target {
+            coroutine.resume(it.toBitmap())
+        }
+    } catch (e: Exception) {
+        coroutine.resumeWithException(e)
+    }
+}
 
 fun TextView.setTextResource(@StringRes resId: Int) {
     text = context.getString(resId)

@@ -60,7 +60,6 @@ class RadioButton @JvmOverloads constructor(
         }
     }
 
-
     fun setColor(color1: Int, color2: Int) {
         color = color1
         checkedColor = color2

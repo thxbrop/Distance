@@ -29,6 +29,8 @@ import java.util.Objects;
 
 /**
  * 异常管理类
+ *
+ * @author 来自网络
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.unltm.distance.base.contracts.isNull
 import com.unltm.distance.storage.AuthStorage
+import com.unltm.distance.ui.conversation.exception.AccountNotExistException
 import com.unltm.distance.ui.conversation.result.GetCurrentUser
 import kotlinx.coroutines.launch
 
@@ -27,15 +27,10 @@ class ConversationViewModel private constructor(
     }
 
     companion object {
-        private var INSTANCE: ConversationViewModel? = null
-        fun getInstance() = run {
-            if (INSTANCE.isNull) {
-                INSTANCE = ConversationViewModel(
-                    authStorage = AuthStorage()
-                )
-            }
-            INSTANCE!!
-
+        val INSTANCE by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+            ConversationViewModel(
+                authStorage = AuthStorage()
+            )
         }
     }
 }
