@@ -2,7 +2,6 @@ package com.unltm.distance.datasource.impl
 
 import android.util.Log
 import com.unltm.distance.base.Result
-import com.unltm.distance.base.ServerException
 import com.unltm.distance.datasource.IAuthDataSource
 import com.unltm.distance.datasource.config.AuthConfig
 
@@ -27,7 +26,7 @@ class AuthDataSource(
         try {
             val user = authConfig.login(email, password)
             Result.Success(user)
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             Log.e(TAG, "login: ", e)
             Result.Error(e)
         }

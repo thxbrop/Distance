@@ -17,10 +17,12 @@ class EditViewModel private constructor(
         id: String,
         username: String? = null,
         email: String? = null,
-        password: String? = null
+        password: String? = null,
+        phoneNumber: Long? = null
     ) {
         viewModelScope.launch {
-            _editLive.value = accountRepository.updateInfo(id, username, email, password)
+            _editLive.value =
+                accountRepository.updateInfo(id, username, email, password, phoneNumber)
         }
     }
 

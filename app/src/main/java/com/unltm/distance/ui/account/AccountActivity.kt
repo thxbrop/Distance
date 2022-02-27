@@ -1,7 +1,6 @@
 package com.unltm.distance.ui.account
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -12,16 +11,15 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.imageview.ShapeableImageView
 import com.r0adkll.slidr.Slidr
 import com.unltm.distance.R
+import com.unltm.distance.base.collection.Items
 import com.unltm.distance.base.collection.Launchers
 import com.unltm.distance.base.contracts.*
 import com.unltm.distance.databinding.ActivityAccountBinding
+import com.unltm.distance.fragment.listbottomsheet.ListBottomSheet
 import com.unltm.distance.room.entity.UserRich
 import com.unltm.distance.ui.components.dialog.BitmapDialog
 import com.unltm.distance.ui.components.dialog.DialogUtils
 import com.unltm.distance.ui.components.dialog.ProgressDialog
-import com.unltm.distance.ui.edit.EditActivity
-import com.unltm.distance.ui.edit.EditActivity.Companion.TYPE
-import com.unltm.distance.ui.edit.EditActivity.Companion.USER_RICH
 import com.unltm.distance.ui.settings.Fork
 import com.unltm.distance.ui.settings.SETTING_FORK
 import com.unltm.distance.ui.settings.SettingActivity
@@ -32,6 +30,7 @@ class AccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccountBinding
     private lateinit var viewModel: AccountViewModel
     private lateinit var selectMediaLauncher: ActivityResultLauncher<String>
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var progressDialog: ProgressDialog
     private lateinit var userRich: UserRich
     private var headPictures = mutableListOf<Bitmap>()
@@ -63,6 +62,7 @@ class AccountActivity : AppCompatActivity() {
             uploadedBitmap = (widgetAvatar.drawable as BitmapDrawable).bitmap
             viewModel.uploadHeadPicture(uploadedBitmap!!)
         }
+        requestPermissionLauncher = Launchers.requestPermissionLauncher(this)
     }
 
 
@@ -71,19 +71,30 @@ class AccountActivity : AppCompatActivity() {
             it.title.text = getString(R.string.account)
             it.key.text = getString(R.string.information_base_username)
             it.body.setOnClickListener {
-                startActivity(Intent(this@AccountActivity, EditActivity::class.java).apply {
-                    putExtra(TYPE, EditActivity.Type.NAME)
-                    putExtra(USER_RICH, userRich)
-                })
+                val accountList = Items.getAccountSubMenu(
+                    this@AccountActivity,
+                    supportFragmentManager,
+                    userRich
+                )
+                ListBottomSheet(
+                    userRich.username,
+                    accountList
+                ).show(supportFragmentManager)
             }
         }
         activityAccountPhone.let {
             it.key.text = getString(R.string.information_base_phone)
             it.body.setOnClickListener {
-                startActivity(Intent(this@AccountActivity, EditActivity::class.java).apply {
-                    putExtra(TYPE, EditActivity.Type.PHONE)
-                    putExtra(USER_RICH, userRich)
-                })
+                val accountList = Items.getPhoneSubmenu(
+                    this@AccountActivity,
+                    requestPermissionLauncher,
+                    userRich,
+                    true
+                )
+                ListBottomSheet(
+                    userRich.phoneNumber.formatPhoneNumber() ?: getString(R.string.no_phone_number),
+                    accountList
+                ).show(supportFragmentManager)
             }
         }
         activityAccountDescription.key.text = getString(R.string.information_base_description)
@@ -184,18 +195,28 @@ class AccountActivity : AppCompatActivity() {
 //                Snackbar.make(binding.root, result, Snackbar.LENGTH_SHORT).show()
 //            }
 //        }
-        viewModel.getCurrentUser()
     }
 
     private fun updateInformation(userRich: UserRich) {
         this.userRich = userRich
         widgetPhone.text =
             if (userRich.phoneNumber.isNull) getString(R.string.no_phone_number)
-            else userRich.phoneNumber.toString()
-        widgetIntroduce.text = userRich.introduce
+            else userRich.phoneNumber.formatPhoneNumber()
+        widgetIntroduce.text =
+            userRich.introduce.ifBlank { getString(R.string.no_description) }
         lifecycleScope.launch(Dispatchers.IO) {
             headPictures = userRich.avatars.map { it.toBitmap() }.toMutableList()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCurrentUser()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.clear()
     }
 }
 

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.imageview.ShapeableImageView
 import com.unltm.distance.R
 import com.unltm.distance.base.collection.Launchers
@@ -112,5 +113,10 @@ class ConversationActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         requestPermissions.launch(permissions)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCurrentUser()
     }
 }

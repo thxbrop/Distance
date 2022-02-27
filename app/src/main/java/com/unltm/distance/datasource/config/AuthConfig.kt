@@ -18,12 +18,12 @@ class AuthConfig : BaseConfig() {
 
     suspend fun login(email: String, password: String) =
         suspendCancellableCoroutine<User> {
-            request("$loginUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password", it)
+            buildStringRequest("$loginUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password", it)
         }
 
     suspend fun sign(email: String, password: String) =
         suspendCancellableCoroutine<User> {
-            request("$signUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password", it)
+            buildStringRequest("$signUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password", it)
         }
 
 }

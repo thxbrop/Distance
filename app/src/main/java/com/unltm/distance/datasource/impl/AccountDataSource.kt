@@ -30,12 +30,12 @@ class AccountDataSource(
         id: String,
         username: String?,
         email: String?,
-        password: String?
+        password: String?,
+        phoneNumber: Long?
     ): Result<UserRich> = run {
         try {
-            accountConfig.updateInfo(id, username, email, password).let {
+            accountConfig.updateInfo(id, username, email, password, phoneNumber).let {
                 val toSafeTyped = it.toSafeTyped()
-                Log.e(TAG, "updateInfo: $toSafeTyped")
                 Result.Success(toSafeTyped)
             }
         } catch (e: Exception) {

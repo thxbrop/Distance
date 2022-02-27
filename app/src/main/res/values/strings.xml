@@ -57,7 +57,7 @@
     <string name="big_picture">查看原图</string>
     <string name="history_pictures">查看历史头像</string>
     <string name="empty_username">[未设置用户名]</string>
-    <string name="no_description">[该用户未设置个人简介]</string>
+    <string name="no_description">[未设置个人简介]</string>
 
     <string name="information_base_username">用户名称</string>
     <string name="information_base_phone">点击更换手机号码</string>
@@ -165,8 +165,8 @@
 
     <string name="phone_number">手机号码</string>
     <string name="phone_number_visibility">谁可以查看我的手机号码</string>
-    <string name="unKnow_phone_number">[手机信息已隐藏]</string>
-    <string name="no_phone_number">[未知手机号码]</string>
+    <string name="unKnow_phone_number">[未知手机号码]</string>
+    <string name="no_phone_number">[未设置手机号码]</string>
 
     <string name="everyone">所有人</string>
     <string name="no_one">禁止所有人</string>

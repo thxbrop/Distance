@@ -55,22 +55,22 @@ class EditActivity : AppCompatActivity() {
 
             when (type) {
                 Type.NAME -> {
-                    title = getString(R.string.edit_name)
+                    this@EditActivity.title = getString(R.string.edit_name)
                     edittext.setText(userRich.username)
                 }
                 Type.PHONE -> {
-                    title = getString(R.string.edit_phone)
-                    edittext.setText("${userRich.phoneNumber}")
+                    this@EditActivity.title = getString(R.string.edit_phone)
+                    userRich.phoneNumber?.let { edittext.setText("$it") }
                     binding.edittext.inputType = InputType.TYPE_CLASS_PHONE
                 }
                 Type.DESCRIPTION -> {
                     edittext.setText(userRich.introduce)
-                    title = getString(R.string.edit_description)
+                    this@EditActivity.title = getString(R.string.edit_description)
                 }
             }
             activityEditToolbar.setNavigationOnClickListener { supportFinishAfterTransition() }
-            activityEditToolbar.title = title
-            edittext.hint = title
+            activityEditToolbar.title = this@EditActivity.title
+            edittext.hint = this@EditActivity.title
             activityEditToolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.menu_edit_toolbar_correct -> {
@@ -109,9 +109,12 @@ class EditActivity : AppCompatActivity() {
         fun savePhone(phone: String?) = lifecycleScope.launch(Dispatchers.Main) {
             val isPhoneNumber = phone.isPhoneNumber()
             if (isPhoneNumber) {
-                TODO()
+                viewModel.edit(
+                    id = userRich.id,
+                    phoneNumber = phone?.toLong()
+                )
             } else {
-                showToast(R.string.wrong_phone_number)
+                showErrorToast(R.string.wrong_phone_number)
                 loadingDialog.dismiss()
                 binding.edittext.isEnabled = true
             }
@@ -135,7 +138,7 @@ class EditActivity : AppCompatActivity() {
     companion object {
         const val TYPE = "type"
         const val USER_RICH = "user_rich"
-        fun start(activity: AppCompatActivity, type: Type, value: String?) {
+        fun start(activity: AppCompatActivity, type: Type, value: UserRich) {
             activity.startActivity(Intent(activity, EditActivity::class.java).apply {
                 putExtra(TYPE, type)
                 putExtra(USER_RICH, value)
