@@ -10,6 +10,7 @@ interface IAccountDataSource {
         id: String,
         username: String? = null,
         email: String? = null,
-        password: String? = null
+        password: String? = null,
+        phoneNumber: Long? = null
     ): Result<UserRich>
 }

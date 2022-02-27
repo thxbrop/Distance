@@ -15,3 +15,10 @@ fun String?.isPhoneNumber(): Boolean {
     if (this == null) return false
     return length == 11
 }
+
+fun Long?.formatPhoneNumber(areaCode: Int = 86): String? {
+    if (this == null) return null
+    return "+$areaCode ${toString().take(3)}-${
+        toString().substring(3, 7)
+    }-${toString().takeLast(4)}"
+}

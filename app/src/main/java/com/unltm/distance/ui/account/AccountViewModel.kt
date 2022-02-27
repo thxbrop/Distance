@@ -51,6 +51,11 @@ class AccountViewModel private constructor(
         TODO()
     }
 
+    fun clear() {
+        _richInfoLive.value = GetRichUserResult()
+        _currentUserLive.value = GetCurrentUser()
+    }
+
     companion object {
         val INSTANCE by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             AccountViewModel(
