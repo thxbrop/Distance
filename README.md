@@ -197,7 +197,6 @@
         - SettingsActivity.kt
     - *MainActivity.kt*
     - *MyApplication.kt*
-> storage已被废弃，使用ktorm替换之，并且他可能会在后续项目中版本移除
 
 点击[这里](https://github.com/thxbrop/Distance)获取该项目最新源代码
 
