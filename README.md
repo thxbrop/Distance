@@ -22,13 +22,6 @@
   - Json
   - Android 基础
 
-### Features
-- * [x] 注册登录
-- * [ ] 基础会话
-- * [ ] 创建会话
-- * [ ] 账户头像
-- * [x] 账户更新
-
 ### 项目结构
 - main
   - java.com.unltm.distance
