@@ -16,7 +16,7 @@ import com.unltm.distance.R
 import com.unltm.distance.adapter.bottomsheet.SettingItem
 import com.unltm.distance.base.contracts.loadHTTPS
 import com.unltm.distance.base.contracts.showToast
-import com.unltm.distance.base.file.FileUtils
+import com.unltm.distance.base.file.Files
 import com.unltm.distance.fragment.listbottomsheet.ListBottomSheet
 import com.unltm.distance.ui.components.photoview.PhotoView
 
@@ -65,7 +65,7 @@ class NetworkImageDialog(
                                 var icon: Int = R.drawable.live_state_warn
                                 src[position]?.let {
                                     val textId: Int = if (
-                                        FileUtils.saveImage(
+                                        Files.saveImage(
                                             bitmaps[position]
                                         )
                                     ) {

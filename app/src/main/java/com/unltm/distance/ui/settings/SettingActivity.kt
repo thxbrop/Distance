@@ -17,7 +17,7 @@ import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrInterface
 import com.unltm.distance.R
 import com.unltm.distance.base.contracts.*
-import com.unltm.distance.base.file.FileUtils
+import com.unltm.distance.base.file.Files
 import com.unltm.distance.databinding.ActivitySettingsBinding
 import com.unltm.distance.datasource.config.BaseConfig
 import com.unltm.distance.ui.components.dialog.LoadingDialog
@@ -263,7 +263,7 @@ class SettingActivity : AppCompatActivity() {
                         submit(50)
                         if (record.isChecked()) {
                             com.blankj.utilcode.util.FileUtils.deleteAllInDir(
-                                FileUtils.RecordPath + "/"
+                                Files.RecordPath + "/"
                             )
                             record.setTitle(getString(R.string.cache_voice))
                             record.setCheck(false)
@@ -279,7 +279,7 @@ class SettingActivity : AppCompatActivity() {
                     image.setTitle("图片（${DecimalFormat("0.00").format(bitmapSize / 1024 / 1024f)}MB）")
                     submit(50)
                     val listFilesInDir = com.blankj.utilcode.util.FileUtils.listFilesInDir(
-                        FileUtils.RecordPath + "/"
+                        Files.RecordPath + "/"
                     )
                     var total = 0L
                     listFilesInDir.forEach {

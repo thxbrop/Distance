@@ -31,4 +31,13 @@ data class UserRich(
     }
 
     fun toSimpleUser() = User(id, email, username)
+
+
+    fun asLite() = run {
+        User(
+            id = this.id,
+            email = this.email,
+            username = this.username
+        )
+    }
 }

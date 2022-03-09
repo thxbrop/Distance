@@ -4,7 +4,7 @@ import com.unltm.distance.room.entity.User
 import com.unltm.distance.room.entity.UserRich
 import kotlinx.coroutines.suspendCancellableCoroutine
 
-class AccountConfig : BaseConfig() {
+class AccountConfig private constructor() : BaseConfig() {
     companion object {
         private val uri: String get() = baseUrl + "account/"
         private const val INFO = "info"
@@ -13,6 +13,7 @@ class AccountConfig : BaseConfig() {
         private const val KEY_EMAIL = "email"
         private const val KEY_PASSWORD = "password"
         private const val KEY_PHONE_NUMBER = "phoneNumber"
+        private const val KEY_INTRODUCE = "introduce"
         private const val UPDATE = "update"
         private val infoUrl: String get() = uri + INFO
         private val updateUrl: String get() = uri + UPDATE
@@ -21,20 +22,22 @@ class AccountConfig : BaseConfig() {
     }
 
     suspend fun getRichInfo(user: User) =
-        suspendCancellableCoroutine<UserRich?> { buildStringRequest("$infoUrl?$KEY_ID=${user.id}", it) }
+        suspendCancellableCoroutine<UserRich?> { it.resumeWithRequestUrl("$infoUrl?$KEY_ID=${user.id}") }
 
     suspend fun updateInfo(
         id: String,
         username: String? = null,
         email: String? = null,
         password: String? = null,
-        phoneNumber: Long? = null
+        phoneNumber: Long? = null,
+        introduce: String?
     ) = suspendCancellableCoroutine<UserRich> { coroutine ->
         var s = "$updateUrl?$KEY_ID=$id&"
         username?.also { s += "$KEY_USERNAME=$it&" }
         email?.also { s += "$KEY_EMAIL=$it&" }
         password?.also { s += "$KEY_PASSWORD=$it" }
         phoneNumber?.also { s += "$KEY_PHONE_NUMBER=$it" }
-        buildStringRequest(s, coroutine)
+        introduce?.also { s += "$KEY_INTRODUCE=$it" }
+        coroutine.resumeWithRequestUrl(s)
     }
 }

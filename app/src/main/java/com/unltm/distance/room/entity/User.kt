@@ -9,4 +9,14 @@ data class User(
     @PrimaryKey val id: String,
     val email: String,
     val username: String
-) : Serializable
+) : Serializable {
+
+    fun asRich() = run {
+        UserRich(
+            id = this.id,
+            email = this.email,
+            username = this.username,
+            password = ""
+        )
+    }
+}

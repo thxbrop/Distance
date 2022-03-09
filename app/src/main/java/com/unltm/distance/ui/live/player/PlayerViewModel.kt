@@ -6,20 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unltm.distance.base.Result
 import com.unltm.distance.datasource.LiveDataSource
-import com.unltm.distance.datasource.gson.Com
-import com.unltm.distance.ui.live.GetRealUriException
+import com.unltm.distance.datasource.gson.Platform
+import com.unltm.distance.ui.live.GetRealUrlException
 import com.unltm.distance.ui.live.LiveRoomNotPlayingException
-import com.unltm.distance.ui.live.result.GetRealUriResult
+import com.unltm.distance.ui.live.result.GetRealUrlResult
 import kotlinx.coroutines.launch
 
 class PlayerViewModel private constructor(
     private val liveDataSource: LiveDataSource
 ) : ViewModel() {
-    private var _realUriLive = MutableLiveData<GetRealUriResult>()
-    val realUriLive: LiveData<GetRealUriResult> = _realUriLive
+    private var _realUriLive = MutableLiveData<GetRealUrlResult>()
+    val realUrlLive: LiveData<GetRealUrlResult> = _realUriLive
 
     fun clearAll() {
-        _realUriLive.value = GetRealUriResult()
+        _realUriLive.value = GetRealUrlResult()
     }
 
     fun getRealUri(roomId: Int, com: String) {
@@ -28,21 +28,21 @@ class PlayerViewModel private constructor(
                 is Result.Success ->
                     when (val result = liveDataSource.getRoomRealUri(com, roomId)) {
                         is Result.Success -> {
-                            _realUriLive.value = GetRealUriResult(data = result.data)
+                            _realUriLive.value = GetRealUrlResult(data = result.data)
                         }
                         is Result.Error -> {
                             _realUriLive.value =
-                                GetRealUriResult(error = GetRealUriException(roomId, com))
+                                GetRealUrlResult(error = GetRealUrlException(roomId, com))
                         }
                     }
                 is Result.Error -> _realUriLive.value =
-                    GetRealUriResult(error = LiveRoomNotPlayingException(roomId, com))
+                    GetRealUrlResult(error = LiveRoomNotPlayingException(roomId, com))
             }
 
         }
     }
 
-    fun checkLiveStates(com: Com, roomId: Int) {
+    fun checkLiveStates(platform: Platform, roomId: Int) {
 
     }
 

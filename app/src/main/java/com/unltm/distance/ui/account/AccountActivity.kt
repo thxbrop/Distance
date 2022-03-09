@@ -20,6 +20,7 @@ import com.unltm.distance.room.entity.UserRich
 import com.unltm.distance.ui.components.dialog.BitmapDialog
 import com.unltm.distance.ui.components.dialog.DialogUtils
 import com.unltm.distance.ui.components.dialog.ProgressDialog
+import com.unltm.distance.ui.edit.EditActivity
 import com.unltm.distance.ui.settings.Fork
 import com.unltm.distance.ui.settings.SETTING_FORK
 import com.unltm.distance.ui.settings.SettingActivity
@@ -97,7 +98,12 @@ class AccountActivity : AppCompatActivity() {
                 ).show(supportFragmentManager)
             }
         }
-        activityAccountDescription.key.text = getString(R.string.information_base_description)
+        activityAccountDescription.let {
+            it.key.text = getString(R.string.information_base_description)
+            it.body.setOnClickListener {
+                EditActivity.start(this@AccountActivity, EditActivity.Type.INTRODUCE, userRich)
+            }
+        }
         activityAccountNotify.let {
             it.title.text = getString(R.string.setting)
             it.key.text = getString(R.string.setting_notify)
@@ -164,7 +170,8 @@ class AccountActivity : AppCompatActivity() {
     private fun initObserver() {
         viewModel.currentUserLive.observe(this) { result ->
             result.success?.let {
-                var username = it.first().username
+                userRich = it.first().asRich()
+                var username = userRich.username
                 if (username.isBlank()) username = getString(R.string.empty_username)
                 widgetUsername.text = username
                 viewModel.getRichInfo(it.first())
@@ -177,24 +184,6 @@ class AccountActivity : AppCompatActivity() {
             result.success?.let { updateInformation(it) }
             result.error?.let { showErrorToast(it.localizedMessage) }
         }
-//        viewModel.uploadHeadPictureLive.observe(this) { task ->
-//            task?.addOnProgressListener {
-//                val progress = (100.0 * it.bytesTransferred) / it.totalByteCount
-//                progressDialog.show()
-//                progressDialog.submit(progress.toInt())
-//            }
-//            task?.addOnSuccessListener {
-//                val result = getString(R.string.success_upload)
-//                headPictures.add(uploadedBitmap!!)
-//                progressDialog.dismiss()
-//                Snackbar.make(binding.root, result, Snackbar.LENGTH_SHORT).show()
-//            }
-//            task?.addOnFailureListener {
-//                val result = getString(R.string.error_upload)
-//                progressDialog.dismiss()
-//                Snackbar.make(binding.root, result, Snackbar.LENGTH_SHORT).show()
-//            }
-//        }
     }
 
     private fun updateInformation(userRich: UserRich) {

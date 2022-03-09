@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.imageview.ShapeableImageView
 import com.unltm.distance.R
 import com.unltm.distance.base.collection.Launchers
@@ -20,6 +19,7 @@ import com.unltm.distance.room.entity.User
 import com.unltm.distance.ui.account.AccountActivity
 import com.unltm.distance.ui.live.reco.RecoActivity
 import com.unltm.distance.ui.login.LoginActivity
+import com.unltm.distance.ui.music.MusicActivity
 
 class ConversationActivity : AppCompatActivity() {
 
@@ -87,6 +87,9 @@ class ConversationActivity : AppCompatActivity() {
                 when (item.itemId) {
                     R.id.menu_main_navigation_live -> {
                         startActivity<RecoActivity>()
+                    }
+                    R.id.menu_main_navigation_music -> {
+                        startActivity<MusicActivity>()
                     }
                 }
                 false

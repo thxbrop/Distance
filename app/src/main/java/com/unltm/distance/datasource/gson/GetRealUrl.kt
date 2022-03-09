@@ -1,6 +1,6 @@
 package com.unltm.distance.datasource.gson
 
-data class GetRealUri(
+data class GetRealUrl(
     val code: Int,
     val `data`: Data,
     val msg: String

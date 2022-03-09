@@ -45,7 +45,7 @@
     <string name="delete">删除</string>
 
     <string name="edit_name">编辑名称</string>
-    <string name="edit_description">个人简介</string>
+    <string name="edit_introduce">个人简介</string>
     <string name="edit_id">用户名称</string>
     <string name="edit_phone">修改手机号码</string>
     <string name="account">账号</string>
@@ -173,7 +173,7 @@
     <string name="only_contract">仅限联系人</string>
 
     <string name="doubleBackPress">再按一次退出</string>
-    <string name="wrong_phone_number">手机号码格式错误</string>
+    <string name="illegal_phone_number">手机号码格式错误</string>
 
     <string name="unLog">未登录</string>
     <string name="password">密码</string>
@@ -206,5 +206,6 @@
     <string name="setting_proxy_address">服务器地址</string>
     <string name="setting_proxy_port">端口</string>
     <string name="login_email">电子邮件登录</string>
+    <string name="illegal_introduce">简介格式有误</string>
 
 </resources>

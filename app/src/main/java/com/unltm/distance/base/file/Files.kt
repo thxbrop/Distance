@@ -1,5 +1,6 @@
 package com.unltm.distance.base.file
 
+import android.app.DownloadManager
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,7 +9,10 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
+import com.google.android.exoplayer2.util.MimeTypes
 import com.unltm.distance.application
+import com.unltm.distance.base.contracts.downloadManager
+import com.unltm.distance.base.contracts.downloadManagerRequest
 import com.unltm.distance.base.contracts.isNotNull
 import com.unltm.distance.base.contracts.requireSdk
 import java.io.File
@@ -17,7 +21,8 @@ import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-object FileUtils {
+@Suppress("unused")
+object Files {
 
     private val CachePath = "${application.applicationContext?.externalCacheDir?.absolutePath}"
 
@@ -129,6 +134,27 @@ object FileUtils {
         object PUT : RequestMethod("PUT")
         object DELETE : RequestMethod("DELETE")
         object TRACE : RequestMethod("TRACE")
+    }
+
+    /**
+     * @see MimeTypes
+     */
+    fun downloadHTTP(
+        url: String,
+        title: String,
+        description: String?,
+        file: File,
+        mimeType: String
+    ): Long? {
+        return downloadManager?.let {
+            val request = downloadManagerRequest(Uri.parse(url))
+                .setTitle(title)
+                .setDescription(description)
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE or DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setMimeType(mimeType)
+                .setDestinationUri(Uri.fromFile(file))
+            it.enqueue(request)
+        }
     }
 
     fun download(
