@@ -10,10 +10,10 @@ import com.android.volley.toolbox.Volley
 import com.blankj.utilcode.util.GsonUtils
 import com.unltm.distance.application
 import com.unltm.distance.base.Result
-import com.unltm.distance.datasource.gson.Com
+import com.unltm.distance.datasource.gson.Platform
 import com.unltm.distance.datasource.gson.GetLivePreview
 import com.unltm.distance.datasource.gson.GetLiveState
-import com.unltm.distance.datasource.gson.GetRealUri
+import com.unltm.distance.datasource.gson.GetRealUrl
 import com.unltm.distance.ui.live.LivePreview
 import com.unltm.distance.ui.live.LiveRoomNotPlayingException
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -66,13 +66,13 @@ class LiveDataSource(
 
     suspend fun getRoomRealUri(com: String, roomId: Int) =
         suspendCancellableCoroutine<Result<String>> { coroutine ->
-            when (Com.valueOf(com)) {
-                Com.DouYu -> queryRealUriOfDouYu(roomId)
-                Com.HuYa -> queryRealUriOfHuYa(roomId)
-                Com.Bili -> queryRealUriOfBili(roomId)
+            when (Platform.valueOf(com)) {
+                Platform.DouYu -> queryRealUriOfDouYu(roomId)
+                Platform.HuYa -> queryRealUriOfHuYa(roomId)
+                Platform.Bili -> queryRealUriOfBili(roomId)
             }.request(
                 {
-                    val result = GsonUtils.fromJson(it, GetRealUri::class.java)
+                    val result = GsonUtils.fromJson(it, GetRealUrl::class.java)
                     if (result.data.realUrl != NOT_ALIVE) coroutine.resume(Result.Success(result.data.realUrl))
                         .also {
                             Log.e(TAG, "com:$com result:${result.data.realUrl}")
@@ -86,10 +86,10 @@ class LiveDataSource(
 
     suspend fun checkLiveStates(roomId: Int, com: String) =
         suspendCancellableCoroutine<Result<Boolean>> { coroutine ->
-            when (Com.valueOf(com)) {
-                Com.DouYu -> queryLiveStateDouyu(roomId)
-                Com.HuYa -> queryLiveStateHuya(roomId)
-                Com.Bili -> queryLiveStateBili(roomId)
+            when (Platform.valueOf(com)) {
+                Platform.DouYu -> queryLiveStateDouyu(roomId)
+                Platform.HuYa -> queryLiveStateHuya(roomId)
+                Platform.Bili -> queryLiveStateBili(roomId)
             }.request(
                 {
                     val result = GsonUtils.fromJson(it, GetLiveState::class.java)

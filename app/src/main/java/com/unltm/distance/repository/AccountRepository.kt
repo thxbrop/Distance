@@ -76,9 +76,11 @@ class AccountRepository private constructor(
         username: String? = null,
         email: String? = null,
         password: String? = null,
-        phoneNumber: Long? = null
+        phoneNumber: Long? = null,
+        introduce: String? = null
     ): UpdateResult {
-        return when (val result = accountDataSource.updateInfo(id, username, email, password,phoneNumber)) {
+        return when (val result =
+            accountDataSource.updateInfo(id, username, email, password, phoneNumber,introduce)) {
             is Result.Success -> {
                 withContext(Dispatchers.IO) {
                     authStorage.saveAccount(result.data.toSimpleUser())

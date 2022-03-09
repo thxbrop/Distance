@@ -1,4 +1,4 @@
-package com.unltm.distance.components
+package com.unltm.distance.ui.components
 
 import android.animation.TypeEvaluator
 import android.graphics.Color

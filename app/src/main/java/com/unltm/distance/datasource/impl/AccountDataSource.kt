@@ -31,10 +31,11 @@ class AccountDataSource(
         username: String?,
         email: String?,
         password: String?,
-        phoneNumber: Long?
+        phoneNumber: Long?,
+        introduce: String?
     ): Result<UserRich> = run {
         try {
-            accountConfig.updateInfo(id, username, email, password, phoneNumber).let {
+            accountConfig.updateInfo(id, username, email, password, phoneNumber, introduce).let {
                 val toSafeTyped = it.toSafeTyped()
                 Result.Success(toSafeTyped)
             }

@@ -9,7 +9,7 @@ class AuthDataSource(
     private val authConfig: AuthConfig
 ) : IAuthDataSource {
     companion object {
-        private const val TAG = "AuthDataSourceImpl"
+        private const val TAG = "AuthDataSource"
     }
 
     override suspend fun sign(email: String, password: String) = run {

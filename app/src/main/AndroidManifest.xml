@@ -46,9 +46,27 @@
             android:name=".ui.account.AccountActivity"
             android:theme="@style/Theme.Information" />
         <activity android:name=".ui.settings.SettingActivity" />
+        <activity android:name=".ui.music.MusicActivity" />
         <activity android:name=".ui.live.reco.RecoActivity" />
         <activity android:name=".ui.live.player.PlayerActivity" />
         <activity android:name=".ui.edit.EditActivity" />
+
+        <receiver
+            android:name=".base.file.DownloaderBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.unltm.distance.base.file.FileUtils;
+import com.unltm.distance.base.file.Files;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -197,7 +197,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             long timestamp = System.currentTimeMillis();
             String time = format.format(new Date());
             String fileName = "crash-" + time + "-" + timestamp + ".log";
-            String path = FileUtils.getCrashPath() + "/";
+            String path = Files.getCrashPath() + "/";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 File dir = new File(path);
                 if (!dir.exists()) {

@@ -11,6 +11,7 @@ interface IAccountDataSource {
         username: String? = null,
         email: String? = null,
         password: String? = null,
-        phoneNumber: Long? = null
+        phoneNumber: Long? = null,
+        introduce: String?
     ): Result<UserRich>
 }

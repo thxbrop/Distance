@@ -11,7 +11,6 @@ import com.r0adkll.slidr.Slidr
 import com.unltm.distance.R
 import com.unltm.distance.base.contracts.isPhoneNumber
 import com.unltm.distance.base.contracts.showErrorToast
-import com.unltm.distance.base.contracts.showToast
 import com.unltm.distance.databinding.ActivityEditBinding
 import com.unltm.distance.room.entity.UserRich
 import com.unltm.distance.ui.account.AccountViewModel
@@ -26,7 +25,7 @@ class EditActivity : AppCompatActivity() {
         NAME,
 
         /**ID,*/
-        PHONE, DESCRIPTION
+        PHONE, INTRODUCE
     }
 
     private lateinit var type: Type
@@ -40,52 +39,16 @@ class EditActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initBase()
+        binding.init()
+        initObserver()
+    }
 
-        type = intent.getSerializableExtra(TYPE) as Type
-        userRich = intent.getSerializableExtra(USER_RICH) as UserRich
-
-        loadingDialog = LoadingDialog(this)
-        binding = ActivityEditBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        Slidr.attach(this)
-
-        viewModel = EditViewModel.INSTANCE
-
-        binding.apply {
-
-            when (type) {
-                Type.NAME -> {
-                    this@EditActivity.title = getString(R.string.edit_name)
-                    edittext.setText(userRich.username)
-                }
-                Type.PHONE -> {
-                    this@EditActivity.title = getString(R.string.edit_phone)
-                    userRich.phoneNumber?.let { edittext.setText("$it") }
-                    binding.edittext.inputType = InputType.TYPE_CLASS_PHONE
-                }
-                Type.DESCRIPTION -> {
-                    edittext.setText(userRich.introduce)
-                    this@EditActivity.title = getString(R.string.edit_description)
-                }
-            }
-            activityEditToolbar.setNavigationOnClickListener { supportFinishAfterTransition() }
-            activityEditToolbar.title = this@EditActivity.title
-            edittext.hint = this@EditActivity.title
-            activityEditToolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.menu_edit_toolbar_correct -> {
-                        save(edittext.text.toString())
-                        true
-                    }
-                    else -> false
-                }
-            }
-            textInputLayout.requestFocus()
-        }
-
+    private fun initObserver() {
         viewModel.updateResult.observe(this) { result ->
+            loadingDialog.dismiss()
+            binding.edittext.isEnabled = true
             result.data?.let {
-                loadingDialog.dismiss()
                 KeyboardUtils.hideSoftInput(this@EditActivity)
                 AccountViewModel.INSTANCE.updateRichInfo(it)
                 finish()
@@ -95,6 +58,49 @@ class EditActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun initBase() {
+        type = intent.getSerializableExtra(TYPE) as Type
+        userRich = intent.getSerializableExtra(USER_RICH) as UserRich
+
+        loadingDialog = LoadingDialog(this)
+        binding = ActivityEditBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        Slidr.attach(this)
+        viewModel = EditViewModel.INSTANCE
+    }
+
+    private fun ActivityEditBinding.init() {
+        when (type) {
+            Type.NAME -> {
+                this@EditActivity.title = getString(R.string.edit_name)
+                edittext.setText(userRich.username)
+            }
+            Type.PHONE -> {
+                this@EditActivity.title = getString(R.string.edit_phone)
+                userRich.phoneNumber?.let { edittext.setText("$it") }
+                binding.edittext.inputType = InputType.TYPE_CLASS_PHONE
+            }
+            Type.INTRODUCE -> {
+                edittext.setText(userRich.introduce)
+                this@EditActivity.title = getString(R.string.edit_introduce)
+            }
+        }
+        activityEditToolbar.setNavigationOnClickListener { supportFinishAfterTransition() }
+        activityEditToolbar.title = this@EditActivity.title
+        edittext.hint = this@EditActivity.title
+        activityEditToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_edit_toolbar_correct -> {
+                    save(edittext.text.toString())
+                    true
+                }
+                else -> false
+            }
+        }
+        textInputLayout.requestFocus()
+    }
+
 
     private fun save(string: String?) {
         binding.edittext.isEnabled = false
@@ -114,19 +120,26 @@ class EditActivity : AppCompatActivity() {
                     phoneNumber = phone?.toLong()
                 )
             } else {
-                showErrorToast(R.string.wrong_phone_number)
+                showErrorToast(R.string.illegal_phone_number)
                 loadingDialog.dismiss()
                 binding.edittext.isEnabled = true
             }
         }
 
-        fun saveDescription(description: String?) = lifecycleScope.launch(Dispatchers.IO) {
-            TODO()
+        fun saveIntroduce(introduce: String?) = lifecycleScope.launch(Dispatchers.IO) {
+            if (introduce.isNullOrBlank()) {
+                showErrorToast(R.string.illegal_introduce)
+            } else {
+                viewModel.edit(
+                    id = userRich.id,
+                    introduce = introduce
+                )
+            }
         }
         when (type) {
             Type.NAME -> saveName(string)
             Type.PHONE -> savePhone(string)
-            Type.DESCRIPTION -> saveDescription(string)
+            Type.INTRODUCE -> saveIntroduce(string)
         }
     }
 

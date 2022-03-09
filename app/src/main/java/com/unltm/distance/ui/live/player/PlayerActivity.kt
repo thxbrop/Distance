@@ -57,7 +57,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.realUriLive.observe(this) { result ->
+        viewModel.realUrlLive.observe(this) { result ->
             result.data?.let {
                 mediaItem = MediaItem.fromUri(it)
                 mediaSource =

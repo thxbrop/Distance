@@ -15,7 +15,7 @@ import coil.load
 import com.unltm.distance.R
 import com.unltm.distance.adapter.bottomsheet.SettingItem
 import com.unltm.distance.base.contracts.showToast
-import com.unltm.distance.base.file.FileUtils
+import com.unltm.distance.base.file.Files
 import com.unltm.distance.fragment.listbottomsheet.ListBottomSheet
 import com.unltm.distance.ui.components.photoview.PhotoView
 
@@ -57,7 +57,7 @@ class BitmapDialog(
                             ) {
                                 val icon: Int
                                 src[position]?.let {
-                                    val textId = if (FileUtils.saveImage(it)) {
+                                    val textId = if (Files.saveImage(it)) {
                                         icon = R.drawable.live_state_primary
                                         R.string.success_save
                                     } else {
