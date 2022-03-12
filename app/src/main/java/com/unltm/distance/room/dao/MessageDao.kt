@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.unltm.distance.room.entity.Message
-import com.unltm.distance.room.entity.User
 
 @Dao
 interface MessageDao {
@@ -21,4 +20,7 @@ interface MessageDao {
 
     @Query("SELECT * FROM Message WHERE id = :id")
     suspend fun getMessageById(id: String): Message?
+
+    @Query("SELECT * FROM Message WHERE conversationId = :id")
+    suspend fun getMessagesByConversationId(id: String): List<Message>
 }

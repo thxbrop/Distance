@@ -84,10 +84,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             result.error?.let {
                 if (it is ServerException) {
                     when (it) {
-                        ServerException.ERROR_SIGN_ILLEGAL_EMAIL -> {
+                        ServerException.ILLEGAL_EMAIL -> {
                             emailEditText.error = it.message
                         }
-                        ServerException.ERROR_SIGN_ILLEGAL_PASSWORD -> {
+                        ServerException.ILLEGAL_PASSWORD -> {
                             passwordEditText.error = it.message
                         }
                     }

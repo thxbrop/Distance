@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     app:layoutDescription="@xml/activity_chat_scene"
-    tools:context=".activity.chat.ChatActivity">
+    tools:context=".ui.chat.ChatActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/activity_chat_app_bar"

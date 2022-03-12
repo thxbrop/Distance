@@ -1,9 +1,10 @@
 package com.unltm.distance.repository
 
 import com.unltm.distance.base.Result
-import com.unltm.distance.datasource.impl.ConversationDataSource
+import com.unltm.distance.datasource.ConversationDataSource
 import com.unltm.distance.storage.ConversationStorage
 import com.unltm.distance.ui.conversation.result.GetConversationResult
+import com.unltm.distance.ui.conversation.result.GetConversationsResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -21,6 +22,10 @@ class ConversationRepository private constructor(
             }
             is Result.Error -> GetConversationResult(error = result.exception)
         }
+    }
+
+    suspend fun getMyConversations(): GetConversationsResult {
+        return GetConversationsResult(data = conversationStorage.getAllConversations())
     }
 
     suspend fun getByIdFromCache(id: String): GetConversationResult {

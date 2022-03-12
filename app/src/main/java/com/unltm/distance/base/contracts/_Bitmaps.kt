@@ -24,18 +24,17 @@ fun buildTextBitmap(
 ) = run {
     when (shape) {
         TextBitmapShape.Round ->
-            shapeBuilder.buildRound((s.trim().uppercase().firstOrNull() ?: " ") as String, color)
-                .toBitmap()
+            shapeBuilder.buildRound((s.trim().uppercase().firstOrNull() ?: " ").toString(), color)
+                .toBitmap(size, size)
         TextBitmapShape.Rect ->
-            shapeBuilder.buildRect((s.trim().uppercase().firstOrNull() ?: " ") as String, color)
-                .toBitmap()
+            shapeBuilder.buildRect((s.trim().uppercase().firstOrNull() ?: " ").toString(), color)
+                .toBitmap(size, size)
         TextBitmapShape.RoundRect ->
             shapeBuilder.buildRoundRect(
-                (s.trim().uppercase().firstOrNull() ?: " ") as String,
+                (s.trim().uppercase().firstOrNull() ?: " ").toString(),
                 color,
                 size / 4
-            )
-                .toBitmap()
+            ).toBitmap(size, size)
     }
 }
 

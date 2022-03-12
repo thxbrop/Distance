@@ -1,14 +1,14 @@
 package com.unltm.distance.repository
 
 import com.unltm.distance.base.Result
+import com.unltm.distance.base.ServerException
+import com.unltm.distance.datasource.AccountDataSource
+import com.unltm.distance.datasource.AuthDataSource
 import com.unltm.distance.datasource.config.AccountConfig
 import com.unltm.distance.datasource.config.AuthConfig
-import com.unltm.distance.datasource.impl.AccountDataSource
-import com.unltm.distance.datasource.impl.AuthDataSource
 import com.unltm.distance.room.entity.User
 import com.unltm.distance.storage.AccountStorage
 import com.unltm.distance.storage.AuthStorage
-import com.unltm.distance.ui.account.exception.GetRichInfoException
 import com.unltm.distance.ui.edit.result.UpdateResult
 import com.unltm.distance.ui.login.result.GetRichUserResult
 import com.unltm.distance.ui.login.result.LoginResult
@@ -66,7 +66,7 @@ class AccountRepository private constructor(
                 GetRichUserResult(success = userRich)
             }
             is Result.Error -> GetRichUserResult(
-                error = GetRichInfoException()
+                error = ServerException.NOT_FOUND_RICH_USER
             )
         }
     }
@@ -80,7 +80,7 @@ class AccountRepository private constructor(
         introduce: String? = null
     ): UpdateResult {
         return when (val result =
-            accountDataSource.updateInfo(id, username, email, password, phoneNumber,introduce)) {
+            accountDataSource.updateInfo(id, username, email, password, phoneNumber, introduce)) {
             is Result.Success -> {
                 withContext(Dispatchers.IO) {
                     authStorage.saveAccount(result.data.toSimpleUser())

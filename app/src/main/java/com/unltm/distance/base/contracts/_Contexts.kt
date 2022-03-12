@@ -12,6 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.blankj.utilcode.util.ToastUtils
 import com.unltm.distance.R
+import com.unltm.distance.base.file.FileType
+import okhttp3.*
+import okio.BufferedSink
+import okio.buffer
+import okio.sink
+import java.io.File
+import java.io.IOException
 import java.io.Serializable
 
 fun Context.requirePermission(
@@ -52,6 +59,42 @@ fun Context.showErrorToast(@StringRes stringRes: Int) {
 fun Context.showErrorToast(s: String?) {
     showToast(s, R.drawable.live_state_warn)
 }
+
+
+fun Context.checkFileExist(uri: String?, saveAs: FileType): Boolean {
+    if (uri.isNullOrBlank()) return false
+    return File(getExternalFilesDir(saveAs.environment)?.absolutePath + '/' + uri.getFileName()).exists()
+}
+
+fun Context.download(uri: String?, saveAs: FileType, callback: (Throwable?) -> Unit) {
+    if (uri.isNullOrBlank()) return
+    val request = Request.Builder().url(uri.toHttps()!!).build()
+    OkHttpClient().newCall(request).enqueue(object : Callback {
+        override fun onResponse(call: Call, response: Response) {
+            val file: File?
+            var buffer: BufferedSink? = null
+            try {
+                val filename = uri.getFileName()
+                val path = getExternalFilesDir(saveAs.environment)?.path
+                file = File(path, filename)
+                buffer = file.sink().buffer()
+                response.body()?.let { responseBody ->
+                    buffer.writeAll(responseBody.source())
+                    callback.invoke(null)
+                }
+            } catch (e: Exception) {
+                callback.invoke(e)
+            } finally {
+                buffer?.close()
+            }
+        }
+
+        override fun onFailure(call: Call, e: IOException) {
+            callback.invoke(e)
+        }
+    })
+}
+
 
 fun showToast(stringRes: CharSequence?, resId: Int = R.drawable.live_state_primary) {
     ToastUtils.make()

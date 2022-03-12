@@ -1,36 +1,28 @@
 package com.unltm.distance.ui.conversation
 
+import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unltm.distance.repository.ConversationRepository
 import com.unltm.distance.storage.AuthStorage
-import com.unltm.distance.ui.conversation.exception.AccountNotExistException
+import com.unltm.distance.ui.conversation.result.CreateConversationResult
 import com.unltm.distance.ui.conversation.result.GetConversationResult
-import com.unltm.distance.ui.conversation.result.GetCurrentUser
 import kotlinx.coroutines.launch
 
 class ConversationViewModel private constructor(
-    private val authStorage: AuthStorage /** Just Read Local DB*/,
+    private val authStorage: AuthStorage
+    /** Just Read Local DB*/
+    ,
     private val conversationRepository: ConversationRepository
 ) : ViewModel() {
-    private var _currentUserLive = MutableLiveData<GetCurrentUser>()
-    val currentUserLive: LiveData<GetCurrentUser> = _currentUserLive
 
     private var _conversationLive = MutableLiveData<GetConversationResult>()
     val conversationLive: LiveData<GetConversationResult> = _conversationLive
 
-    fun getCurrentUser() {
-        viewModelScope.launch {
-            val allAccount = authStorage.getAllAccount()
-            _currentUserLive.value = if (allAccount.isEmpty()) {
-                GetCurrentUser(error = AccountNotExistException())
-            } else {
-                GetCurrentUser(success = allAccount)
-            }
-        }
-    }
+    private var _createConversationLive = MutableLiveData<CreateConversationResult>()
+    val createConversationLive: LiveData<CreateConversationResult> get() = _createConversationLive
 
     fun getConversationById(id: String) {
         viewModelScope.launch {
@@ -40,6 +32,11 @@ class ConversationViewModel private constructor(
             }
         }
     }
+
+    fun createConversation(editable: Editable) {
+
+    }
+
 
     companion object {
         val INSTANCE by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {

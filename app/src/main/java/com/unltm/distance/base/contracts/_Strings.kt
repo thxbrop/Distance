@@ -11,6 +11,8 @@ fun String?.toHttps(): String? {
     }
 }
 
+fun String.getFileName(): String = takeLast(count() - lastIndexOf('/') - 1)
+
 fun String?.isPhoneNumber(): Boolean {
     if (this == null) return false
     return length == 11

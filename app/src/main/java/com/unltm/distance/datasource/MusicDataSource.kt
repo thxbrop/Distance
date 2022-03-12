@@ -1,8 +1,8 @@
-package com.unltm.distance.datasource.impl
+package com.unltm.distance.datasource
 
 import android.util.Log
 import com.unltm.distance.base.Result
-import com.unltm.distance.datasource.IMusicDataSource
+import com.unltm.distance.datasource.base.IMusicDataSource
 import com.unltm.distance.datasource.config.MusicConfig
 import com.unltm.distance.room.entity.Music
 

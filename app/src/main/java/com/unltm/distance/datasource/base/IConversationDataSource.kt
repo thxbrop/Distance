@@ -1,4 +1,4 @@
-package com.unltm.distance.datasource
+package com.unltm.distance.datasource.base
 
 import com.unltm.distance.base.Result
 import com.unltm.distance.room.entity.Conversation

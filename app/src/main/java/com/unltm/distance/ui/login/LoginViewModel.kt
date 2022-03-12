@@ -23,11 +23,11 @@ class LoginViewModel(
         when {
             email.isNullOrBlank() -> {
                 _loginResultLive.value =
-                    LoginResult(error = ServerException.ERROR_SIGN_ILLEGAL_EMAIL)
+                    LoginResult(error = ServerException.ILLEGAL_EMAIL)
             }
             password.isNullOrBlank() -> {
                 _loginResultLive.value =
-                    LoginResult(error = ServerException.ERROR_SIGN_ILLEGAL_PASSWORD)
+                    LoginResult(error = ServerException.ILLEGAL_PASSWORD)
             }
             else -> {
                 viewModelScope.launch {
@@ -40,11 +40,11 @@ class LoginViewModel(
     fun sign(email: String?, password: String?) {
         when {
             email.isNullOrBlank() -> {
-                _signResultLive.value = SignResult(error = ServerException.ERROR_SIGN_ILLEGAL_EMAIL)
+                _signResultLive.value = SignResult(error = ServerException.ILLEGAL_EMAIL)
             }
             password.isNullOrBlank() -> {
                 _signResultLive.value =
-                    SignResult(error = ServerException.ERROR_SIGN_ILLEGAL_PASSWORD)
+                    SignResult(error = ServerException.ILLEGAL_PASSWORD)
             }
             else -> {
                 viewModelScope.launch {

@@ -1,8 +1,7 @@
-package com.unltm.distance.datasource.impl
+package com.unltm.distance.datasource
 
 import com.unltm.distance.base.Result
-import com.unltm.distance.base.ServerException
-import com.unltm.distance.datasource.IConversationDataSource
+import com.unltm.distance.datasource.base.IConversationDataSource
 import com.unltm.distance.datasource.config.ConversationConfig
 import com.unltm.distance.room.entity.Conversation
 
@@ -12,7 +11,7 @@ class ConversationDataSource private constructor(
     override suspend fun getById(id: String): Result<Conversation> {
         return try {
             Result.Success(conversationConfig.getById(id))
-        } catch (e: ServerException) {
+        } catch (e: Exception) {
             Result.Error(e)
         }
     }
@@ -25,7 +24,7 @@ class ConversationDataSource private constructor(
     ): Result<Conversation> {
         return try {
             Result.Success(conversationConfig.create(userId, invitedIds, name, simpleName))
-        } catch (e: ServerException) {
+        } catch (e: Exception) {
             Result.Error(e)
         }
     }

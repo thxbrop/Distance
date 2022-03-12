@@ -31,5 +31,15 @@ data class ImageMessage(
     override val from: String,
     override val createdAt: Long = 0,
     override val updateAt: Long = createdAt,
-    val url: String
+    val fileUrl: String
+) : Message(id, conversationId, content, from, createdAt, updateAt)
+
+data class AudioMessage(
+    override val id: String,
+    override val conversationId: String,
+    override val content: String,
+    override val from: String,
+    override val createdAt: Long = 0,
+    override val updateAt: Long = createdAt,
+    val fileUrl: String
 ) : Message(id, conversationId, content, from, createdAt, updateAt)

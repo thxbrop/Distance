@@ -10,6 +10,7 @@
     <string name="menu_main_music">音乐</string>
     <string name="menu_main_test">测试</string>
 
+    <string name="cd_create">创建</string>
     <string name="cd_create_conversation">创建会话</string>
     <string name="cd_create_conversation_dialog_title">选择一个用户</string>
     <string name="cd_more">更多</string>
@@ -207,5 +208,10 @@
     <string name="setting_proxy_port">端口</string>
     <string name="login_email">电子邮件登录</string>
     <string name="illegal_introduce">简介格式有误</string>
+    <string name="illegal_name">名称格式有误</string>
+    <string name="cd_create_conversation_name">会话的名称</string>
+    <string name="cd_conversation_finish">会话退出</string>
+    <string name="cd_select_account">选择一个账户</string>
+    <string name="retry">重试</string>
 
 </resources>

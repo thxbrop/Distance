@@ -6,9 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 
 object Launchers {
-    fun requestPermissionsLauncher(activity: ComponentActivity) =
-        activity.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
-
     fun selectMediaLauncher(activity: ComponentActivity, block: (Uri) -> Unit) =
         activity.registerForActivityResult(
             ActivityResultContracts.GetContent()

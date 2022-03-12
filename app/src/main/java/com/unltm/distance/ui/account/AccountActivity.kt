@@ -169,7 +169,7 @@ class AccountActivity : AppCompatActivity() {
 
     private fun initObserver() {
         viewModel.currentUserLive.observe(this) { result ->
-            result.success?.let {
+            result.data?.let {
                 userRich = it.first().asRich()
                 var username = userRich.username
                 if (username.isBlank()) username = getString(R.string.empty_username)

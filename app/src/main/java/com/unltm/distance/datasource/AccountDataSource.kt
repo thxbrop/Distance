@@ -1,12 +1,12 @@
-package com.unltm.distance.datasource.impl
+package com.unltm.distance.datasource
 
 import android.util.Log
 import com.unltm.distance.base.Result
-import com.unltm.distance.datasource.IAccountDataSource
+import com.unltm.distance.base.ServerException
+import com.unltm.distance.datasource.base.IAccountDataSource
 import com.unltm.distance.datasource.config.AccountConfig
 import com.unltm.distance.room.entity.User
 import com.unltm.distance.room.entity.UserRich
-import com.unltm.distance.ui.account.exception.GetRichInfoException
 
 class AccountDataSource(
     private val accountConfig: AccountConfig
@@ -19,7 +19,7 @@ class AccountDataSource(
         try {
             accountConfig.getRichInfo(user)?.let {
                 Result.Success(it)
-            } ?: return@run Result.Error(GetRichInfoException())
+            } ?: return@run Result.Error(ServerException.NOT_FOUND_RICH_USER)
         } catch (e: Exception) {
             Log.e(TAG, "getRichInfo: ", e)
             Result.Error(e)

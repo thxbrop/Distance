@@ -1,8 +1,8 @@
-package com.unltm.distance.datasource.impl
+package com.unltm.distance.datasource
 
 import android.util.Log
 import com.unltm.distance.base.Result
-import com.unltm.distance.datasource.IAuthDataSource
+import com.unltm.distance.datasource.base.IAuthDataSource
 import com.unltm.distance.datasource.config.AuthConfig
 
 class AuthDataSource(

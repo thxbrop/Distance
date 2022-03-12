@@ -29,7 +29,6 @@
         android:ellipsize="end"
         android:includeFontPadding="false"
         android:lines="1"
-        android:maxEms="4"
         android:textColor="@color/secondaryTextColor"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"

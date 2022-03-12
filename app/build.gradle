@@ -14,8 +14,8 @@ android {
         applicationId "com.unltm.distance"
         minSdk 24
         targetSdk 31
-        versionCode 1
-        versionName "1.1-alpha03"
+        versionCode 4
+        versionName "1.1-alpha04"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -43,9 +43,8 @@ android {
 dependencies {
     implementation 'androidx.paging:paging-runtime-ktx:3.1.0'
     def nav_version = "2.4.1"
-    def room_version = "2.4.1"
+    def room_version = "2.4.2"
     def lifecycle_version = "2.4.1"
-    def media3_version = "1.0.0-alpha01"
     // Base
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -69,7 +68,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-paging:$room_version"
     // Lottie
-    implementation 'com.airbnb.android:lottie:5.0.1'
+    implementation 'com.airbnb.android:lottie:5.0.3'
     // Jetpack - Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
@@ -100,7 +99,7 @@ dependencies {
     implementation "io.noties.markwon:editor:4.6.2"
 
     //Exoplayer
-    implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
-    implementation 'com.google.android.exoplayer:extension-rtmp:2.16.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
+    implementation 'com.google.android.exoplayer:extension-rtmp:2.17.1'
 
 }
