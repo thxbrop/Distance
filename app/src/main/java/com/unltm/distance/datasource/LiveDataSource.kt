@@ -10,12 +10,12 @@ import com.android.volley.toolbox.Volley
 import com.blankj.utilcode.util.GsonUtils
 import com.unltm.distance.application
 import com.unltm.distance.base.Result
-import com.unltm.distance.datasource.gson.Platform
+import com.unltm.distance.base.ServerException
 import com.unltm.distance.datasource.gson.GetLivePreview
 import com.unltm.distance.datasource.gson.GetLiveState
 import com.unltm.distance.datasource.gson.GetRealUrl
+import com.unltm.distance.datasource.gson.Platform
 import com.unltm.distance.ui.live.LivePreview
-import com.unltm.distance.ui.live.LiveRoomNotPlayingException
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.nio.charset.Charset
 import kotlin.coroutines.resume
@@ -77,7 +77,7 @@ class LiveDataSource(
                         .also {
                             Log.e(TAG, "com:$com result:${result.data.realUrl}")
                         }
-                    else coroutine.resume(Result.Error(LiveRoomNotPlayingException(roomId, com)))
+                    else coroutine.resume(Result.Error(ServerException.ERROR_LIVE_NOT_PLAYING))
                 }, {
                     coroutine.resume(Result.Error(it))
                 }

@@ -1,7 +1,7 @@
 package com.unltm.distance.repository
 
 import com.unltm.distance.base.Result
-import com.unltm.distance.datasource.impl.MusicDataSource
+import com.unltm.distance.datasource.MusicDataSource
 import com.unltm.distance.room.entity.Music
 import com.unltm.distance.storage.MusicStorage
 

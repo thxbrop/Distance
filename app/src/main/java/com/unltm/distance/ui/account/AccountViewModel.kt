@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.unltm.distance.base.ServerException
 import com.unltm.distance.repository.AccountRepository
 import com.unltm.distance.room.entity.User
 import com.unltm.distance.room.entity.UserRich
-import com.unltm.distance.ui.conversation.exception.AccountNotExistException
 import com.unltm.distance.ui.conversation.result.GetCurrentUser
 import com.unltm.distance.ui.login.result.GetRichUserResult
 import kotlinx.coroutines.launch
@@ -29,9 +29,9 @@ class AccountViewModel private constructor(
         viewModelScope.launch {
             val allAccount = accountRepository.getCurrentUser()
             _currentUserLive.value = if (allAccount.isEmpty()) {
-                GetCurrentUser(error = AccountNotExistException())
+                GetCurrentUser(error = ServerException.AUTH_NOT_EXIST)
             } else {
-                GetCurrentUser(success = allAccount)
+                GetCurrentUser(data = allAccount)
             }
         }
     }

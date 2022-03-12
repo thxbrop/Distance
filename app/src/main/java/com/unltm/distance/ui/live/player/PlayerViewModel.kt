@@ -5,10 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unltm.distance.base.Result
+import com.unltm.distance.base.ServerException
 import com.unltm.distance.datasource.LiveDataSource
 import com.unltm.distance.datasource.gson.Platform
-import com.unltm.distance.ui.live.GetRealUrlException
-import com.unltm.distance.ui.live.LiveRoomNotPlayingException
 import com.unltm.distance.ui.live.result.GetRealUrlResult
 import kotlinx.coroutines.launch
 
@@ -32,11 +31,11 @@ class PlayerViewModel private constructor(
                         }
                         is Result.Error -> {
                             _realUriLive.value =
-                                GetRealUrlResult(error = GetRealUrlException(roomId, com))
+                                GetRealUrlResult(error = ServerException.ERROR_LIVE_PARSING)
                         }
                     }
                 is Result.Error -> _realUriLive.value =
-                    GetRealUrlResult(error = LiveRoomNotPlayingException(roomId, com))
+                    GetRealUrlResult(error = ServerException.ERROR_LIVE_NOT_PLAYING)
             }
 
         }

@@ -11,5 +11,5 @@ data class Conversation(
     val simpleName: String,
     val createdAt: Long = System.currentTimeMillis(),
     val lastMessageId: String? = null,
-    val lastMessageAt: Long? = 0
+    val lastMessageAt: Long? = null
 )

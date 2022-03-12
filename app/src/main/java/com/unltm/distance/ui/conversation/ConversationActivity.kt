@@ -8,21 +8,27 @@ import android.widget.TextSwitcher
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.unltm.distance.R
-import com.unltm.distance.base.collection.Launchers
-import com.unltm.distance.base.contracts.setTextColorResource
-import com.unltm.distance.base.contracts.startActivity
+import com.unltm.distance.base.contracts.*
 import com.unltm.distance.databinding.ActivityConversationBinding
 import com.unltm.distance.room.entity.User
+import com.unltm.distance.ui.GlobalViewModel
 import com.unltm.distance.ui.account.AccountActivity
+import com.unltm.distance.ui.conversation.components.AccountDialog
+import com.unltm.distance.ui.conversation.components.CreateConversationDialog
 import com.unltm.distance.ui.live.reco.RecoActivity
 import com.unltm.distance.ui.login.LoginActivity
 import com.unltm.distance.ui.music.MusicActivity
 
 class ConversationActivity : AppCompatActivity() {
 
+    private lateinit var globalViewModel: GlobalViewModel
     private lateinit var viewModel: ConversationViewModel
 
     private lateinit var binding: ActivityConversationBinding
@@ -30,6 +36,10 @@ class ConversationActivity : AppCompatActivity() {
     private lateinit var headImageView: ShapeableImageView
     private lateinit var usernameTextView: TextView
     private lateinit var textSwitcher: TextSwitcher
+    private lateinit var createFloatingActionButton: FloatingActionButton
+    private lateinit var recyclerView: RecyclerView
+
+    private lateinit var adapter: ConversationAdapter
 
     private lateinit var requestPermissions: ActivityResultLauncher<Array<String>>
     private val permissions = arrayOf(
@@ -44,12 +54,15 @@ class ConversationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityConversationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        globalViewModel = GlobalViewModel.INSTANCE
         viewModel = ConversationViewModel.INSTANCE
-        requestPermissions = Launchers.requestPermissionsLauncher(this)
+        requestPermissions =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+
+            }
         binding.init()
         initBase()
         initObserver()
-        initOnClickListener()
     }
 
     private fun initBase() {
@@ -57,28 +70,61 @@ class ConversationActivity : AppCompatActivity() {
             if (binding.root.isOpen) binding.root.close()
             else finish()
         }
+        adapter = ConversationAdapter().also { adapter ->
+            recyclerView.adapter = adapter
+            adapter.onInserted { positionStart, itemCount ->
+                (recyclerView.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
+                    positionStart + itemCount - 1, 0
+                )
+            }
+        }
     }
 
     private fun initObserver() {
-        viewModel.currentUserLive.observe(this) { result ->
-            result.success?.let {
-                currentUser = it.toMutableList()
+        globalViewModel.accountLive.observe(this) {
+            currentUser = it.toMutableList()
+            globalViewModel.getConversations()
+            if (it.isNotEmpty()) {
                 usernameTextView.text = it.first().username
                 headImageView.setOnClickListener {
                     startActivity<AccountActivity>()
                 }
-            }
-            result.error?.let {
-                currentUser = mutableListOf()
+                headImageView.setOnLongClickListener { _ ->
+                    AccountDialog(this, it) { position ->
+                        globalViewModel.changeCurrentAccount(it[position].id)
+                    }.show()
+                    true
+                }
+            } else {
+                usernameTextView.setTextResource(R.string.unLog)
                 headImageView.setOnClickListener {
                     startActivity<LoginActivity>()
                 }
             }
         }
-        viewModel.getCurrentUser()
+
+        globalViewModel.conversationsLive.observe(this) { result ->
+            result.data?.let { adapter.submitList(it) }
+            result.error?.let { showErrorToast(it.message) }
+        }
+
+        viewModel.createConversationLive.observe(this) { result ->
+            result.success?.let {
+
+            }
+            result.error?.let { showErrorToast(it.message) }
+        }
     }
 
     private fun ActivityConversationBinding.init() {
+        activityMainRecyclerview.let {
+            recyclerView = it
+            it.layoutManager = LinearLayoutManager(
+                this@ConversationActivity,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+        }
         activityMainNavigationView.let {
             headerView = it.getHeaderView(0)
             headImageView = headerView.findViewById(R.id.imageView)
@@ -106,20 +152,18 @@ class ConversationActivity : AppCompatActivity() {
             }
             setCurrentText(getString(R.string.app_name))
         }
-
-    }
-
-    private fun initOnClickListener() {
-
+        createFloatingActionButton = floatingActionButton.apply {
+            setOnClickListener {
+                CreateConversationDialog(context, true) {
+                    viewModel.createConversation(it)
+                }.show()
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         requestPermissions.launch(permissions)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getCurrentUser()
+        globalViewModel.getAccounts()
     }
 }

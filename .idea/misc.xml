@@ -67,8 +67,9 @@
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ripple_card_seconary.xml" value="0.1495" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/ripple_material_card.xml" value="0.1495" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/selector_round_color.xml" value="0.179" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/drawable/text_cursor.xml" value="0.114" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_account.xml" value="0.11" />
-        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_chat.xml" value="0.1" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_chat.xml" value="0.25" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_community.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_contact.xml" value="0.165" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_conversation.xml" value="0.165" />
@@ -76,10 +77,13 @@
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_login.xml" value="0.5187376725838264" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_main.xml" value="0.1625" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_music.xml" value="0.125" />
-        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_player.xml" value="0.4671163575042159" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_player.xml" value="0.165" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_reco.xml" value="0.45" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_settings.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_test.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/dialog_account.xml" value="0.335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/dialog_conversation_finish.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/dialog_create_conversation.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/fragment_login.xml" value="0.3194444444444444" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/header_main.xml" value="0.1765625" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_chat_edit.xml" value="0.26927083333333335" />
@@ -87,11 +91,14 @@
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_settings_checkbox.xml" value="0.1" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_settings_edittext.xml" value="0.375" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_settings_switch.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_text_input.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_conversation.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_info.xml" value="0.1140625" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_info_footer.xml" value="0.5" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_info_header.xml" value="0.48703703703703705" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_issues.xml" value="0.25" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_live_pre.xml" value="0.5" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_member.xml" value="0.10260416666666666" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_message_record_left.xml" value="0.15052083333333333" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_message_record_right.xml" value="0.15052083333333333" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_music.xml" value="0.38451443569553806" />

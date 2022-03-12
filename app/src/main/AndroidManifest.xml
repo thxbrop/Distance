@@ -43,6 +43,9 @@
             android:name=".ui.conversation.ConversationActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".ui.chat.ChatActivity"
+            android:theme="@style/Theme.Chat" />
+        <activity
             android:name=".ui.account.AccountActivity"
             android:theme="@style/Theme.Information" />
         <activity android:name=".ui.settings.SettingActivity" />
