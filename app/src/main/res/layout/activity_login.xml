@@ -119,4 +119,5 @@
         app:layout_constraintTop_toBottomOf="@id/activity_login_sign"
         app:layout_constraintVertical_bias="1"
         app:tint="@color/colorPrimary" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,6 @@ import com.unltm.distance.base.ServerException
 import com.unltm.distance.datasource.base.IAccountDataSource
 import com.unltm.distance.datasource.config.AccountConfig
 import com.unltm.distance.room.entity.User
-import com.unltm.distance.room.entity.UserRich
 
 class AccountDataSource(
     private val accountConfig: AccountConfig
@@ -33,11 +32,10 @@ class AccountDataSource(
         password: String?,
         phoneNumber: Long?,
         introduce: String?
-    ): Result<UserRich> = run {
+    ): Result<User> = run {
         try {
             accountConfig.updateInfo(id, username, email, password, phoneNumber, introduce).let {
-                val toSafeTyped = it.toSafeTyped()
-                Result.Success(toSafeTyped)
+                Result.Success(it)
             }
         } catch (e: Exception) {
             Log.e(TAG, "updateInfo: ", e)

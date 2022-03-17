@@ -7,13 +7,18 @@ import androidx.room.TypeConverters
 import com.unltm.distance.application
 import com.unltm.distance.base.contracts.isNull
 import com.unltm.distance.room.converter.StringListConverter
-import com.unltm.distance.room.dao.*
-import com.unltm.distance.room.entity.*
+import com.unltm.distance.room.dao.ConversationDao
+import com.unltm.distance.room.dao.MessageDao
+import com.unltm.distance.room.dao.MusicDao
+import com.unltm.distance.room.dao.UserDao
+import com.unltm.distance.room.entity.Conversation
+import com.unltm.distance.room.entity.Message
+import com.unltm.distance.room.entity.Music
+import com.unltm.distance.room.entity.User
 
 @Database(
     entities = [
         User::class,
-        UserRich::class,
         Message::class,
         Conversation::class,
         Music::class
@@ -24,7 +29,6 @@ import com.unltm.distance.room.entity.*
 )
 abstract class MyDatabase : RoomDatabase() {
     abstract fun getUserDao(): UserDao
-    abstract fun getUserRichDao(): UserRichDao
     abstract fun getMessageDao(): MessageDao
     abstract fun getConversationDao(): ConversationDao
     abstract fun getMusicDao(): MusicDao

@@ -2,6 +2,7 @@ package com.unltm.distance.storage
 
 import com.unltm.distance.room.MyDatabase
 import com.unltm.distance.room.entity.Conversation
+import com.unltm.distance.ui.conversation.useCase.CreateConversationUseCase
 
 class ConversationStorage {
     private val conversationDao = MyDatabase.getInstance().getConversationDao()

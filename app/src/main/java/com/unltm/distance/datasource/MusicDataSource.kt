@@ -6,8 +6,6 @@ import com.unltm.distance.datasource.base.IMusicDataSource
 import com.unltm.distance.datasource.config.MusicConfig
 import com.unltm.distance.room.entity.Music
 
-private const val TAG = "MusicDataSource"
-
 class MusicDataSource private constructor(
     private val musicConfig: MusicConfig
 ) : IMusicDataSource {
@@ -33,6 +31,7 @@ class MusicDataSource private constructor(
     }
 
     companion object {
+        private const val TAG = "MusicDataSource"
         val INSTANCE by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             MusicDataSource(
                 musicConfig = MusicConfig.INSTANCE

@@ -74,7 +74,7 @@
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_contact.xml" value="0.165" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_conversation.xml" value="0.165" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_edit.xml" value="0.1421875" />
-        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_login.xml" value="0.5187376725838264" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_login.xml" value="0.11" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_main.xml" value="0.1625" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_music.xml" value="0.125" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/activity_player.xml" value="0.165" />
@@ -92,6 +92,7 @@
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_settings_edittext.xml" value="0.375" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_settings_switch.xml" value="0.15052083333333333" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/include_text_input.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_bottom_sheet.xml" value="0.625" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_conversation.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_info.xml" value="0.1140625" />
         <entry key="..\:/Users/qq277/Desktop/Distance/app/src/main/res/layout/item_info_footer.xml" value="0.5" />

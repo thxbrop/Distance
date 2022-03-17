@@ -20,14 +20,16 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import java.nio.charset.Charset
 import kotlin.coroutines.resume
 
-private const val TAG = "LiveDataSource"
-private const val NOT_ALIVE = "未开播或房间不存在"
-private const val START_INDEX = 0
-private const val DEFAULT_KEY_WORD = "overwatch"
-
 class LiveDataSource(
     private val keyword: String = DEFAULT_KEY_WORD
 ) : PagingSource<Int, LivePreview>() {
+    companion object {
+        private const val TAG = "LiveDataSource"
+        private const val NOT_ALIVE = "未开播或房间不存在"
+        private const val START_INDEX = 0
+        private const val DEFAULT_KEY_WORD = "overwatch"
+    }
+
     private val queue = Volley.newRequestQueue(application.applicationContext)
     private val baseUri = "http://debugers.com:8888/api/"
     private fun queryKeywordUrl(keyword: String, pageNum: Int = START_INDEX): String =

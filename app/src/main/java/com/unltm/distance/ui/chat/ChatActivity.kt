@@ -16,11 +16,13 @@ import com.unltm.distance.base.contracts.showErrorToast
 import com.unltm.distance.databinding.ActivityChatBinding
 import com.unltm.distance.room.entity.Conversation
 import com.unltm.distance.room.entity.Message
+import com.unltm.distance.ui.GlobalViewModel
 import com.unltm.distance.ui.chat.components.ConversationFinishDialog
 
 class ChatActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ChatViewModel
+    private lateinit var globalViewModel: GlobalViewModel
 
     private lateinit var binding: ActivityChatBinding
     private lateinit var mHeadImageView: ImageView
@@ -40,6 +42,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.init()
         viewModel = ChatViewModel.INSTANCE
+        globalViewModel = GlobalViewModel.INSTANCE
         initBase()
         initObserver()
     }
@@ -82,35 +85,35 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.getCurrentUserLive.observe(this) { result ->
-            result.data?.let {
-                adapter = MessageAdapter(it.first().id).also { adapter ->
-                    mRecyclerView.adapter = adapter
-                    adapter.onInserted { positionStart, itemCount ->
-                        (mRecyclerView.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
-                            positionStart + itemCount - 1, 0
-                        )
-                    }
+        globalViewModel.accountLive.observe(this) { result ->
+            adapter = MessageAdapter(result.first().id).also { adapter ->
+                mRecyclerView.adapter = adapter
+                adapter.onInserted { positionStart, itemCount ->
+                    (mRecyclerView.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
+                        positionStart + itemCount - 1, 0
+                    )
                 }
-                initBase()
             }
-            result.error?.let { showErrorToast(it.message) }
+            initBase()
         }
+
         viewModel.getConversationLive.observe(this) { result ->
             result.data?.let { initConversation(it) }
             result.error?.let { showErrorToast(it.message) }
         }
-        viewModel.getMessagesLive.observe(this) { result ->
-            result.data?.let { initMessage(it) }
-            result.error?.let { showErrorToast(it.message) }
-        }
+
     }
 
 
     private fun initConversation(conversation: Conversation) {
         mTextSwitcher.setText(conversation.name)
         mHeadImageView.setImageBitmap(buildTextBitmap(conversation.name))
-        viewModel.getMessages(conversation.id)
+        globalViewModel.messagesLive[conversation.id]?.observe(this) { result ->
+            result.data?.let { initMessage(it) }
+            result.error?.let { showErrorToast(it.message) }
+        }
+        globalViewModel.registerConversation(conversation.id)
+        globalViewModel.getMessages(conversation.id)
     }
 
     private fun initMessage(list: List<Message>) {

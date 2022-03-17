@@ -15,7 +15,7 @@ interface UserDao {
     @Delete
     suspend fun delete(vararg user: User)
 
-    @Query("SELECT * FROM User ORDER BY username")
+    @Query("SELECT * FROM User ORDER BY id")
     suspend fun getAllUser(): List<User>
 
     @Query("SELECT * FROM User WHERE id = :id")

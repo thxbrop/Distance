@@ -1,6 +1,5 @@
 package com.unltm.distance.ui.settings.components
 
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -51,9 +50,9 @@ internal class TextSetting(
             context,
             string,
             items.map { context.getString(it) }.toTypedArray() to
-                    DialogInterface.OnClickListener { _, which ->
-                        selectItem(which)
-                        callback.invoke(which)
+                    {
+                        selectItem(it)
+                        callback.invoke(it)
                     },
             null
         )

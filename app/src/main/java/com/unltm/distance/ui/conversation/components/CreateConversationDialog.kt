@@ -7,13 +7,13 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import com.unltm.distance.R
+import com.unltm.distance.base.contracts.showErrorToast
 import com.unltm.distance.databinding.DialogCreateConversationBinding
 
 class CreateConversationDialog(
     context: Context,
-    cancelable: Boolean,
     private val submitListener: (Editable) -> Unit
-) : AlertDialog(context, cancelable, null) {
+) : AlertDialog(context, true, null) {
     private lateinit var binding: DialogCreateConversationBinding
 
     private var name: Editable? = null
@@ -33,7 +33,11 @@ class CreateConversationDialog(
                 if (name.isNullOrBlank()) {
                     include.root.error = context.getString(R.string.illegal_name)
                 } else {
-                    submitListener.invoke(name!!)
+                    try {
+                        submitListener.invoke(name!!)
+                    } catch (e: Exception) {
+                        context.showErrorToast(e.message)
+                    }
                     dismiss()
                 }
             }

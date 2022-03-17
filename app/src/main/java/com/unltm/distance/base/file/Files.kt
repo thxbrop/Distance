@@ -99,10 +99,10 @@ object Files {
         else saveImageLegacy(bitmap)
     }
 
-    fun saveImageLegacy(
+    fun saveImageStream(
         context: Context,
         bitmap: Bitmap,
-        title: String = "Distance",
+        title: String = System.currentTimeMillis().toString(),
         description: String? = null,
     ): Boolean {
         return requireSdk(Build.VERSION_CODES.Q, {
@@ -150,7 +150,10 @@ object Files {
             val request = downloadManagerRequest(Uri.parse(url))
                 .setTitle(title)
                 .setDescription(description)
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE or DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setNotificationVisibility(
+                    DownloadManager.Request.VISIBILITY_VISIBLE
+                            or DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+                )
                 .setMimeType(mimeType)
                 .setDestinationUri(Uri.fromFile(file))
             it.enqueue(request)

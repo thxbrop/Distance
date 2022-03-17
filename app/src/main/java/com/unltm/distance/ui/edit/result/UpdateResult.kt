@@ -1,8 +1,8 @@
 package com.unltm.distance.ui.edit.result
 
-import com.unltm.distance.room.entity.UserRich
+import com.unltm.distance.room.entity.User
 
 data class UpdateResult(
-    val data: UserRich? = null,
+    val data: User? = null,
     val error: Exception? = null
 )

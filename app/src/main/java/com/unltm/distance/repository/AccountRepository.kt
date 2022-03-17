@@ -83,7 +83,7 @@ class AccountRepository private constructor(
             accountDataSource.updateInfo(id, username, email, password, phoneNumber, introduce)) {
             is Result.Success -> {
                 withContext(Dispatchers.IO) {
-                    authStorage.saveAccount(result.data.toSimpleUser())
+                    authStorage.saveAccount(result.data)
                 }
                 UpdateResult(data = result.data)
             }

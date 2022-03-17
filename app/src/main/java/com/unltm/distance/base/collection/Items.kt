@@ -16,10 +16,10 @@ import com.unltm.distance.adapter.ExpansionAdapter
 import com.unltm.distance.adapter.bottomsheet.SettingItem
 import com.unltm.distance.base.contracts.requirePermission
 import com.unltm.distance.base.contracts.showToast
-import com.unltm.distance.base.jvm.QRCodeConverter
+import com.unltm.distance.base.qrcode.Converter
 import com.unltm.distance.components.dialog.VoiceDialog
-import com.unltm.distance.room.entity.UserRich
-import com.unltm.distance.ui.components.dialog.BitmapDialog
+import com.unltm.distance.room.entity.User
+import com.unltm.distance.ui.components.dialog.image.ImageDialog
 import com.unltm.distance.ui.edit.EditActivity
 
 object Items {
@@ -98,25 +98,25 @@ object Items {
     fun getPhoneSubmenu(
         activity: AppCompatActivity,
         requestPermissionLauncher: ActivityResultLauncher<String>,
-        userRich: UserRich,
+        user: User,
         isAccount: Boolean = false,
     ): List<SettingItem> {
         val mutableListOf = mutableListOf(
             SettingItem(ic_baseline_edit_24, cd_edit)
-            { EditActivity.start(activity, EditActivity.Type.PHONE, userRich) },
+            { EditActivity.start(activity, EditActivity.Type.PHONE, user) },
             SettingItem(ic_baseline_call_24, cd_call) {
                 activity.requirePermission(
                     requestPermissionLauncher,
                     Manifest.permission.CALL_PHONE
                 ) {
-                    PhoneUtils.call((userRich.phoneNumber?:0).toString())
+                    PhoneUtils.call((user.phoneNumber ?: 0).toString())
                 }
             },
             SettingItem(ic_round_content_copy_24, cd_copy) {
-                ClipboardUtils.copyText(userRich.phoneNumber.toString())
+                ClipboardUtils.copyText(user.phoneNumber.toString())
                 activity.showToast(success_copy)
             },
-            SettingItem(ic_baseline_share_24, cd_share),
+            SettingItem(ic_baseline_share_24, cd_share, badge_alpha),
         )
         if (!isAccount) {
             mutableListOf.removeAt(0)
@@ -127,15 +127,15 @@ object Items {
     fun getAccountSubMenu(
         activity: AppCompatActivity,
         fragmentManager: FragmentManager,
-        user: UserRich
+        user: User
     ) = mutableListOf(
         SettingItem(ic_baseline_edit_24, cd_edit) {
             EditActivity.start(activity, EditActivity.Type.NAME, user)
         },
-        SettingItem(ic_round_content_copy_24, cd_copy_link),
+        SettingItem(ic_round_content_copy_24, cd_copy_link, badge_alpha),
         SettingItem(ic_round_qr_code_24, qr_code) {
-            val bitmap = QRCodeConverter.encryptUser(user)
-            BitmapDialog(activity, fragmentManager, bitmap).show()
+            val bitmap = Converter.encryptUser(user)
+            ImageDialog(activity, fragmentManager, bitmap).show()
         }
     ).also {
 //        if (user.id != LCUser.getCurrentUser()?.objectId) {

@@ -1,7 +1,6 @@
 package com.unltm.distance.ui.components.dialog
 
 import android.content.Context
-import android.content.DialogInterface
 import android.view.Gravity
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -9,18 +8,15 @@ import com.unltm.distance.R
 import com.unltm.distance.base.contracts.checkContext
 
 object DialogUtils {
-    private val NOTIFY_POSITION_BUTTON =
-        R.string.dialog_notify_position_button to DialogInterface.OnClickListener { _, _ -> }
-    private val CALLBACK_POSITION_BUTTON =
-        R.string.dialog_callback_position_button to DialogInterface.OnClickListener { _, _ -> }
-    private val CALLBACK_NEGATIVE_BUTTON =
-        R.string.dialog_callback_negative_button to DialogInterface.OnClickListener { _, _ -> }
+    private val NOTIFY_POSITION_BUTTON = R.string.dialog_notify_position_button to { }
+    private val CALLBACK_POSITION_BUTTON = R.string.dialog_callback_position_button to { }
+    private val CALLBACK_NEGATIVE_BUTTON = R.string.dialog_callback_negative_button to { }
 
     private fun showDialog(
         context: Context,
         title: String?, message: String?,
-        positiveButton: Pair<Int, DialogInterface.OnClickListener>?,
-        negativeButton: Pair<Int, DialogInterface.OnClickListener>?,
+        positiveButton: Pair<Int, () -> Unit>?,
+        negativeButton: Pair<Int, () -> Unit>?
     ) {
         context.checkContext { activityContext ->
             AlertDialog.Builder(activityContext).apply {
@@ -28,15 +24,13 @@ object DialogUtils {
                 setMessage(message)
                 positiveButton?.let {
                     setPositiveButton(
-                        context.getString(positiveButton.first),
-                        positiveButton.second
-                    )
+                        context.getString(positiveButton.first)
+                    ) { _, _ -> positiveButton.second() }
                 }
                 negativeButton?.let {
                     setNegativeButton(
-                        context.getString(negativeButton.first),
-                        negativeButton.second
-                    )
+                        context.getString(negativeButton.first)
+                    ) { _, _ -> negativeButton.second() }
                 }
                 create().apply {
                     window?.let {
@@ -48,15 +42,13 @@ object DialogUtils {
                 }
             }
         }
-
     }
-
 
     fun showCallbackDialog(
         context: Context,
         title: String?, message: String?,
-        positiveButton: Pair<Int, DialogInterface.OnClickListener> = CALLBACK_POSITION_BUTTON,
-        negativeButton: Pair<Int, DialogInterface.OnClickListener> = CALLBACK_NEGATIVE_BUTTON,
+        positiveButton: Pair<Int, () -> Unit> = CALLBACK_POSITION_BUTTON,
+        negativeButton: Pair<Int, () -> Unit> = CALLBACK_NEGATIVE_BUTTON,
     ) {
         showDialog(context, title, message, positiveButton, negativeButton)
     }
@@ -64,8 +56,8 @@ object DialogUtils {
     fun showNotifyDialog(
         context: Context,
         title: String?, message: String?,
-        positiveButton: Pair<Int, DialogInterface.OnClickListener> = NOTIFY_POSITION_BUTTON,
-        negativeButton: Pair<Int, DialogInterface.OnClickListener>? = null,
+        positiveButton: Pair<Int, () -> Unit> = NOTIFY_POSITION_BUTTON,
+        negativeButton: Pair<Int, () -> Unit>? = null,
     ) {
         showDialog(context, title, message, positiveButton, negativeButton)
     }
@@ -73,25 +65,27 @@ object DialogUtils {
     fun showListDialog(
         context: Context,
         title: String?,
-        list: Pair<Array<String>, DialogInterface.OnClickListener>,
-        positiveButton: Pair<Int, DialogInterface.OnClickListener>? = CALLBACK_POSITION_BUTTON,
-        negativeButton: Pair<Int, DialogInterface.OnClickListener>? = CALLBACK_NEGATIVE_BUTTON,
+        list: Pair<Array<String>, (Int) -> Unit>,
+        positiveButton: Pair<Int, () -> Unit>? = CALLBACK_POSITION_BUTTON,
+        negativeButton: Pair<Int, () -> Unit>? = CALLBACK_NEGATIVE_BUTTON,
     ) {
         context.checkContext { context1 ->
             AlertDialog.Builder(context1).apply {
                 setTitle(title)
-                setItems(list.first, list.second)
+                setItems(list.first) { _, which -> list.second(which) }
                 positiveButton?.let {
                     setPositiveButton(
-                        context.getString(positiveButton.first),
-                        positiveButton.second
-                    )
+                        context.getString(positiveButton.first)
+                    ) { _, _ ->
+                        positiveButton.second()
+                    }
                 }
                 negativeButton?.let {
                     setNegativeButton(
-                        context.getString(negativeButton.first),
-                        negativeButton.second
-                    )
+                        context.getString(negativeButton.first)
+                    ) { _, _ ->
+                        negativeButton.second()
+                    }
                 }
 
                 create().apply {
@@ -101,9 +95,7 @@ object DialogUtils {
                             it.gravity = Gravity.CENTER
                         }
                         window.setContentView(android.R.layout.select_dialog_item)
-                        window.findViewById<TextView>(android.R.id.text1).apply {
-                            maxLines = 1
-                        }
+                        window.findViewById<TextView>(android.R.id.text1).apply { maxLines = 1 }
                         window.setBackgroundDrawableResource(R.drawable.ripple_card_round)
                     }
                     show()
@@ -111,6 +103,4 @@ object DialogUtils {
             }
         }
     }
-
-
 }

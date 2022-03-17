@@ -1,4 +1,4 @@
-package com.unltm.distance.base.jvm;
+package com.unltm.distance.base.qrcode;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,7 +17,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.util.Hashtable;
 
-public class QRCodeUtil {
+public class Util {
 
     /**
      * 创建二维码位图

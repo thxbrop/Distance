@@ -1,20 +1,16 @@
 package com.unltm.distance.ui.conversation
 
-import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unltm.distance.repository.ConversationRepository
-import com.unltm.distance.storage.AuthStorage
 import com.unltm.distance.ui.conversation.result.CreateConversationResult
 import com.unltm.distance.ui.conversation.result.GetConversationResult
+import com.unltm.distance.ui.conversation.useCase.CreateConversationUseCase
 import kotlinx.coroutines.launch
 
 class ConversationViewModel private constructor(
-    private val authStorage: AuthStorage
-    /** Just Read Local DB*/
-    ,
     private val conversationRepository: ConversationRepository
 ) : ViewModel() {
 
@@ -33,15 +29,16 @@ class ConversationViewModel private constructor(
         }
     }
 
-    fun createConversation(editable: Editable) {
-
+    fun createConversation(useCase: CreateConversationUseCase) {
+        viewModelScope.launch {
+            _createConversationLive.value = conversationRepository.createConversation(useCase)
+        }
     }
 
 
     companion object {
         val INSTANCE by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             ConversationViewModel(
-                authStorage = AuthStorage(),
                 conversationRepository = ConversationRepository.INSTANCE
             )
         }

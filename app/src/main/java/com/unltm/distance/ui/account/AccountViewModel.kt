@@ -5,19 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.unltm.distance.base.ServerException
 import com.unltm.distance.repository.AccountRepository
 import com.unltm.distance.room.entity.User
-import com.unltm.distance.room.entity.UserRich
-import com.unltm.distance.ui.conversation.result.GetCurrentUser
 import com.unltm.distance.ui.login.result.GetRichUserResult
 import kotlinx.coroutines.launch
 
 class AccountViewModel private constructor(
     private val accountRepository: AccountRepository
 ) : ViewModel() {
-    private var _currentUserLive = MutableLiveData<GetCurrentUser>()
-    val currentUserLive: LiveData<GetCurrentUser> = _currentUserLive
 
 //    private var _uploadHeadPictureLive = MutableLiveData<UploadTask>()
 //    val uploadHeadPictureLive: LiveData<UploadTask> = _uploadHeadPictureLive
@@ -25,25 +20,14 @@ class AccountViewModel private constructor(
     private var _richInfoLive = MutableLiveData<GetRichUserResult>()
     val richUserResult: LiveData<GetRichUserResult> = _richInfoLive
 
-    fun getCurrentUser() {
-        viewModelScope.launch {
-            val allAccount = accountRepository.getCurrentUser()
-            _currentUserLive.value = if (allAccount.isEmpty()) {
-                GetCurrentUser(error = ServerException.AUTH_NOT_EXIST)
-            } else {
-                GetCurrentUser(data = allAccount)
-            }
-        }
-    }
-
     fun getRichInfo(user: User) {
         viewModelScope.launch {
             _richInfoLive.value = accountRepository.getRichInfo(user)
         }
     }
 
-    fun updateRichInfo(userRich: UserRich) {
-        _richInfoLive.value = GetRichUserResult(success = userRich)
+    fun updateRichInfo(user: User) {
+        _richInfoLive.value = GetRichUserResult(success = user)
     }
 
     fun uploadHeadPicture(bitmap: Bitmap) {
@@ -53,7 +37,6 @@ class AccountViewModel private constructor(
 
     fun clear() {
         _richInfoLive.value = GetRichUserResult()
-        _currentUserLive.value = GetCurrentUser()
     }
 
     companion object {

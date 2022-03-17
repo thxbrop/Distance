@@ -24,6 +24,7 @@
     <dimen name="margin_xl">24dp</dimen>
     <dimen name="margin_2xl">30dp</dimen>
     <dimen name="margin_3xl">45dp</dimen>
+    <dimen name="font_xxs">8sp</dimen>
     <dimen name="font_xs">10sp</dimen>
     <dimen name="font_s">12sp</dimen>
     <dimen name="font_m">14sp</dimen>

@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.ClickUtils
 import com.unltm.distance.R
 import com.unltm.distance.base.contracts.buildTextBitmap
 import com.unltm.distance.room.entity.Conversation
+import com.unltm.distance.room.entity.Message
 import com.unltm.distance.ui.chat.ChatActivity
 import com.unltm.distance.ui.chat.ChatActivity.Companion.CONVERSATION_ID
 import com.unltm.distance.ui.chat.ChatActivity.Companion.CONVERSATION_NAME
