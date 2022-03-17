@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.unltm.distance.R
+import com.unltm.distance.base.contracts.setTextResource
 
 class BottomSheetAdapter :
     ListAdapter<SettingItem, BottomSheetAdapter.ViewHolder>(DIFF) {
@@ -18,6 +20,7 @@ class BottomSheetAdapter :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val icon: ImageView = itemView.findViewById(R.id.item_bottom_sheet_icon)
         val title: TextView = itemView.findViewById(R.id.item_bottom_sheet_title)
+        val badge: TextView = itemView.findViewById(R.id.item_bottom_sheet_badge)
     }
 
     object DIFF : DiffUtil.ItemCallback<SettingItem>() {
@@ -43,6 +46,10 @@ class BottomSheetAdapter :
             holder.itemView.setOnClickListener {
                 onItemClickListener?.onClick()
                 onClickListener?.onClick(it)
+            }
+            badge?.also {
+                holder.badge.isVisible = true
+                holder.badge.setTextResource(it)
             }
         }
     }

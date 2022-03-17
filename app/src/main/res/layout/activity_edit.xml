@@ -52,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_l"
             android:layout_marginVertical="@dimen/margin_m"
-            app:boxStrokeColor="#96b2d2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

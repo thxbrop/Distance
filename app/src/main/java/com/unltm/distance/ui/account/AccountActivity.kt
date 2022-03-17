@@ -1,6 +1,5 @@
 package com.unltm.distance.ui.account
 
-import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -15,11 +14,12 @@ import com.unltm.distance.base.collection.Items
 import com.unltm.distance.base.collection.Launchers
 import com.unltm.distance.base.contracts.*
 import com.unltm.distance.databinding.ActivityAccountBinding
-import com.unltm.distance.fragment.listbottomsheet.ListBottomSheet
-import com.unltm.distance.room.entity.UserRich
-import com.unltm.distance.ui.components.dialog.BitmapDialog
+import com.unltm.distance.fragment.ListBottomSheetDialog
+import com.unltm.distance.room.entity.User
+import com.unltm.distance.ui.GlobalViewModel
 import com.unltm.distance.ui.components.dialog.DialogUtils
 import com.unltm.distance.ui.components.dialog.ProgressDialog
+import com.unltm.distance.ui.components.dialog.image.ImageDialog
 import com.unltm.distance.ui.edit.EditActivity
 import com.unltm.distance.ui.settings.Fork
 import com.unltm.distance.ui.settings.SETTING_FORK
@@ -29,11 +29,12 @@ import kotlinx.coroutines.launch
 
 class AccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccountBinding
+    private lateinit var globalViewModel: GlobalViewModel
     private lateinit var viewModel: AccountViewModel
     private lateinit var selectMediaLauncher: ActivityResultLauncher<String>
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var progressDialog: ProgressDialog
-    private lateinit var userRich: UserRich
+    private lateinit var user: User
     private var headPictures = mutableListOf<Bitmap>()
 
     private var uploadedBitmap: Bitmap? = null
@@ -47,6 +48,7 @@ class AccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        globalViewModel = GlobalViewModel.INSTANCE
         viewModel = AccountViewModel.INSTANCE
         Slidr.attach(this)
 
@@ -75,10 +77,10 @@ class AccountActivity : AppCompatActivity() {
                 val accountList = Items.getAccountSubMenu(
                     this@AccountActivity,
                     supportFragmentManager,
-                    userRich
+                    user
                 )
-                ListBottomSheet(
-                    userRich.username,
+                ListBottomSheetDialog(
+                    user.username,
                     accountList
                 ).show(supportFragmentManager)
             }
@@ -89,11 +91,11 @@ class AccountActivity : AppCompatActivity() {
                 val accountList = Items.getPhoneSubmenu(
                     this@AccountActivity,
                     requestPermissionLauncher,
-                    userRich,
+                    user,
                     true
                 )
-                ListBottomSheet(
-                    userRich.phoneNumber.formatPhoneNumber() ?: getString(R.string.no_phone_number),
+                ListBottomSheetDialog(
+                    user.phoneNumber.formatPhoneNumber() ?: getString(R.string.no_phone_number),
                     accountList
                 ).show(supportFragmentManager)
             }
@@ -101,7 +103,7 @@ class AccountActivity : AppCompatActivity() {
         activityAccountDescription.let {
             it.key.text = getString(R.string.information_base_description)
             it.body.setOnClickListener {
-                EditActivity.start(this@AccountActivity, EditActivity.Type.INTRODUCE, userRich)
+                EditActivity.start(this@AccountActivity, EditActivity.Type.INTRODUCE, user)
             }
         }
         activityAccountNotify.let {
@@ -148,7 +150,7 @@ class AccountActivity : AppCompatActivity() {
                     this@AccountActivity,
                     getString(R.string.setting_logout),
                     "此操作会删除所有本地用户数据",
-                    R.string.dialog_callback_position_button to DialogInterface.OnClickListener { _, _ ->
+                    R.string.dialog_callback_position_button to {
                         //TODO Logout
                     }
                 )
@@ -158,7 +160,7 @@ class AccountActivity : AppCompatActivity() {
             selectMediaLauncher.launch("image/*")
         }
         activityUserImage.setOnClickListener {
-            BitmapDialog(this@AccountActivity, supportFragmentManager)
+            ImageDialog(this@AccountActivity, supportFragmentManager)
         }
 
         widgetUsername = activityAccountName.value
@@ -168,16 +170,13 @@ class AccountActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.currentUserLive.observe(this) { result ->
-            result.data?.let {
-                userRich = it.first().asRich()
-                var username = userRich.username
+        globalViewModel.accountLive.observe(this) { result ->
+            result?.let {
+                user = it.first()
+                var username = user.username
                 if (username.isBlank()) username = getString(R.string.empty_username)
                 widgetUsername.text = username
                 viewModel.getRichInfo(it.first())
-            }
-            result.error?.let {
-                showErrorToast(it.localizedMessage)
             }
         }
         viewModel.richUserResult.observe(this) { result ->
@@ -186,21 +185,21 @@ class AccountActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateInformation(userRich: UserRich) {
-        this.userRich = userRich
+    private fun updateInformation(user: User) {
+        this.user = user
         widgetPhone.text =
-            if (userRich.phoneNumber.isNull) getString(R.string.no_phone_number)
-            else userRich.phoneNumber.formatPhoneNumber()
+            if (user.phoneNumber.isNull) getString(R.string.no_phone_number)
+            else user.phoneNumber.formatPhoneNumber()
         widgetIntroduce.text =
-            userRich.introduce.ifBlank { getString(R.string.no_description) }
+            user.introduce.ifBlank { getString(R.string.no_description) }
         lifecycleScope.launch(Dispatchers.IO) {
-            headPictures = userRich.avatars.map { it.toBitmap() }.toMutableList()
+            headPictures = user.avatars.map { it.toBitmap() }.toMutableList()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCurrentUser()
+        globalViewModel.getAccounts()
     }
 
     override fun onDestroy() {

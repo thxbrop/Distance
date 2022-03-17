@@ -17,10 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.unltm.distance.R
-import com.unltm.distance.base.contracts.colorRes
-import com.unltm.distance.base.contracts.dp
-import com.unltm.distance.base.contracts.setTextColorResource
-import com.unltm.distance.base.contracts.setTextResource
+import com.unltm.distance.base.contracts.*
 import io.noties.markwon.Markwon
 import io.noties.markwon.editor.MarkwonEditor
 import io.noties.markwon.editor.MarkwonEditorTextWatcher
@@ -103,7 +100,7 @@ class TextEditor(
                     FloatingActionButton(context).apply {
                         contentDescription = context.getString(R.string.cd_submit)
                         setBackgroundResource(R.color.background)
-                        foregroundTintList =
+                        backgroundTintList =
                             ColorStateList.valueOf(context.colorRes(R.color.floating_background))
                         compatElevation = 2f.dp
                         setImageResource(R.drawable.ic_round_send_24)

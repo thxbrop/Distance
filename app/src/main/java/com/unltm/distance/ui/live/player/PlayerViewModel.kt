@@ -23,7 +23,7 @@ class PlayerViewModel private constructor(
 
     fun getRealUri(roomId: Int, com: String) {
         viewModelScope.launch {
-            when (val checkLiveStates = liveDataSource.checkLiveStates(roomId, com)) {
+            when (liveDataSource.checkLiveStates(roomId, com)) {
                 is Result.Success ->
                     when (val result = liveDataSource.getRoomRealUri(com, roomId)) {
                         is Result.Success -> {
@@ -39,10 +39,6 @@ class PlayerViewModel private constructor(
             }
 
         }
-    }
-
-    fun checkLiveStates(platform: Platform, roomId: Int) {
-
     }
 
     companion object {

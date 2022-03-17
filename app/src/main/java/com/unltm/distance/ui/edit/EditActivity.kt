@@ -12,7 +12,7 @@ import com.unltm.distance.R
 import com.unltm.distance.base.contracts.isPhoneNumber
 import com.unltm.distance.base.contracts.showErrorToast
 import com.unltm.distance.databinding.ActivityEditBinding
-import com.unltm.distance.room.entity.UserRich
+import com.unltm.distance.room.entity.User
 import com.unltm.distance.ui.account.AccountViewModel
 import com.unltm.distance.ui.components.dialog.LoadingDialog
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +29,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     private lateinit var type: Type
-    private lateinit var userRich: UserRich
+    private lateinit var user: User
     private var title: String? = null
     private lateinit var loadingDialog: LoadingDialog
     private lateinit var viewModel: EditViewModel
@@ -61,7 +61,7 @@ class EditActivity : AppCompatActivity() {
 
     private fun initBase() {
         type = intent.getSerializableExtra(TYPE) as Type
-        userRich = intent.getSerializableExtra(USER_RICH) as UserRich
+        user = intent.getSerializableExtra(USER_RICH) as User
 
         loadingDialog = LoadingDialog(this)
         binding = ActivityEditBinding.inflate(layoutInflater)
@@ -74,15 +74,15 @@ class EditActivity : AppCompatActivity() {
         when (type) {
             Type.NAME -> {
                 this@EditActivity.title = getString(R.string.edit_name)
-                edittext.setText(userRich.username)
+                edittext.setText(user.username)
             }
             Type.PHONE -> {
                 this@EditActivity.title = getString(R.string.edit_phone)
-                userRich.phoneNumber?.let { edittext.setText("$it") }
+                user.phoneNumber?.let { edittext.setText("$it") }
                 binding.edittext.inputType = InputType.TYPE_CLASS_PHONE
             }
             Type.INTRODUCE -> {
-                edittext.setText(userRich.introduce)
+                edittext.setText(user.introduce)
                 this@EditActivity.title = getString(R.string.edit_introduce)
             }
         }
@@ -107,7 +107,7 @@ class EditActivity : AppCompatActivity() {
         loadingDialog.show()
         fun saveName(name: String?) = lifecycleScope.launch {
             viewModel.edit(
-                id = userRich.id,
+                id = user.id,
                 username = name
             )
         }
@@ -116,7 +116,7 @@ class EditActivity : AppCompatActivity() {
             val isPhoneNumber = phone.isPhoneNumber()
             if (isPhoneNumber) {
                 viewModel.edit(
-                    id = userRich.id,
+                    id = user.id,
                     phoneNumber = phone?.toLong()
                 )
             } else {
@@ -131,7 +131,7 @@ class EditActivity : AppCompatActivity() {
                 showErrorToast(R.string.illegal_introduce)
             } else {
                 viewModel.edit(
-                    id = userRich.id,
+                    id = user.id,
                     introduce = introduce
                 )
             }
@@ -151,7 +151,7 @@ class EditActivity : AppCompatActivity() {
     companion object {
         const val TYPE = "type"
         const val USER_RICH = "user_rich"
-        fun start(activity: AppCompatActivity, type: Type, value: UserRich) {
+        fun start(activity: AppCompatActivity, type: Type, value: User) {
             activity.startActivity(Intent(activity, EditActivity::class.java).apply {
                 putExtra(TYPE, type)
                 putExtra(USER_RICH, value)

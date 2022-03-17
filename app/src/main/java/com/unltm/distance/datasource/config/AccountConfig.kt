@@ -1,7 +1,6 @@
 package com.unltm.distance.datasource.config
 
 import com.unltm.distance.room.entity.User
-import com.unltm.distance.room.entity.UserRich
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 class AccountConfig private constructor() : BaseConfig() {
@@ -22,7 +21,7 @@ class AccountConfig private constructor() : BaseConfig() {
     }
 
     suspend fun getRichInfo(user: User) =
-        suspendCancellableCoroutine<UserRich?> { it.resumeWithRequestUrl("$infoUrl?$KEY_ID=${user.id}") }
+        suspendCancellableCoroutine<User?> { it.resumeWithRequestUrl("$infoUrl?$KEY_ID=${user.id}") }
 
     suspend fun updateInfo(
         id: String,
@@ -31,7 +30,7 @@ class AccountConfig private constructor() : BaseConfig() {
         password: String? = null,
         phoneNumber: Long? = null,
         introduce: String?
-    ) = suspendCancellableCoroutine<UserRich> { coroutine ->
+    ) = suspendCancellableCoroutine<User> { coroutine ->
         var s = "$updateUrl?$KEY_ID=$id&"
         username?.also { s += "$KEY_USERNAME=$it&" }
         email?.also { s += "$KEY_EMAIL=$it&" }

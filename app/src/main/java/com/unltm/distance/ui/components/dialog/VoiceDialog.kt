@@ -3,6 +3,7 @@ package com.unltm.distance.components.dialog
 import android.content.DialogInterface
 import android.media.MediaRecorder
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.HapticFeedbackConstants

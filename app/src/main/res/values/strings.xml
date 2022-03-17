@@ -213,5 +213,9 @@
     <string name="cd_conversation_finish">会话退出</string>
     <string name="cd_select_account">选择一个账户</string>
     <string name="retry">重试</string>
+    <string name="cd_blur">模糊显示</string>
+    <string name="cd_unBlur">取消模糊显示</string>
+    <string name="badge_beta">BETA</string>
+    <string name="badge_alpha">ALPHA</string>
 
 </resources>

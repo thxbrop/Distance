@@ -3,6 +3,8 @@ package com.unltm.distance.ui.conversation
 import android.Manifest
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.widget.TextSwitcher
 import android.widget.TextView
@@ -22,9 +24,12 @@ import com.unltm.distance.ui.GlobalViewModel
 import com.unltm.distance.ui.account.AccountActivity
 import com.unltm.distance.ui.conversation.components.AccountDialog
 import com.unltm.distance.ui.conversation.components.CreateConversationDialog
+import com.unltm.distance.ui.conversation.useCase.CreateConversationUseCase
 import com.unltm.distance.ui.live.reco.RecoActivity
 import com.unltm.distance.ui.login.LoginActivity
 import com.unltm.distance.ui.music.MusicActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ConversationActivity : AppCompatActivity() {
 
@@ -108,8 +113,16 @@ class ConversationActivity : AppCompatActivity() {
             result.error?.let { showErrorToast(it.message) }
         }
 
+        globalViewModel.messagesLive.forEach { (_, livedata) ->
+            livedata.observe(this) { result ->
+                result.data?.let {
+                    Log.e(javaClass.simpleName, "messagesLive:$it")
+                }
+            }
+        }
+
         viewModel.createConversationLive.observe(this) { result ->
-            result.success?.let {
+            result.data?.let {
 
             }
             result.error?.let { showErrorToast(it.message) }
@@ -154,8 +167,14 @@ class ConversationActivity : AppCompatActivity() {
         }
         createFloatingActionButton = floatingActionButton.apply {
             setOnClickListener {
-                CreateConversationDialog(context, true) {
-                    viewModel.createConversation(it)
+                CreateConversationDialog(context) {
+                    val user = requireNotNull(globalViewModel.currentUser)
+                    viewModel.createConversation(
+                        CreateConversationUseCase(
+                            creator = user.id,
+                            name = it.toString()
+                        )
+                    )
                 }.show()
             }
         }

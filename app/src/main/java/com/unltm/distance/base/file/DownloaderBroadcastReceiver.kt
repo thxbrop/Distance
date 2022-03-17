@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 
-private const val TAG = "DownloaderBroadcastReceiver"
 
 class DownloaderBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.e(TAG, "onReceive: ")
+    }
+
+    companion object {
+        private const val TAG = "DownloaderBroadcastReceiver"
     }
 }

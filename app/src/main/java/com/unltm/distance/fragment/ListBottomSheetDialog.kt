@@ -1,4 +1,4 @@
-package com.unltm.distance.fragment.listbottomsheet
+package com.unltm.distance.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,10 @@ import com.unltm.distance.adapter.bottomsheet.BottomSheetAdapter
 import com.unltm.distance.adapter.bottomsheet.OnItemClickListener
 import com.unltm.distance.adapter.bottomsheet.SettingItem
 
-class ListBottomSheet(
+/**
+ * @see SettingItem
+ */
+class ListBottomSheetDialog(
     private val title: String,
     private val list: List<SettingItem>,
 ) : BottomSheetDialogFragment() {
@@ -34,7 +37,7 @@ class ListBottomSheet(
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<TextView>(R.id.fragment_bottom_sheet_title).text = title
         view.findViewById<RecyclerView>(R.id.fragment_bottom_sheet_recyclerview).apply {
-            layoutManager = LinearLayoutManager(this@ListBottomSheet.requireContext())
+            layoutManager = LinearLayoutManager(this@ListBottomSheetDialog.requireContext())
             adapter = BottomSheetAdapter().apply {
                 setItemOnClickListener(object : OnItemClickListener {
                     override fun onClick() {

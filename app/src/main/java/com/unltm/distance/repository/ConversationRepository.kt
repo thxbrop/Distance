@@ -3,8 +3,10 @@ package com.unltm.distance.repository
 import com.unltm.distance.base.Result
 import com.unltm.distance.datasource.ConversationDataSource
 import com.unltm.distance.storage.ConversationStorage
+import com.unltm.distance.ui.conversation.result.CreateConversationResult
 import com.unltm.distance.ui.conversation.result.GetConversationResult
 import com.unltm.distance.ui.conversation.result.GetConversationsResult
+import com.unltm.distance.ui.conversation.useCase.CreateConversationUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -32,6 +34,20 @@ class ConversationRepository private constructor(
         return conversationStorage.getConversationById(id)?.let {
             GetConversationResult(data = it)
         } ?: GetConversationResult()
+    }
+
+    suspend fun createConversation(useCase: CreateConversationUseCase): CreateConversationResult {
+        return conversationDataSource.create(
+            userId = useCase.creator,
+            invitedIds = useCase.invitedIds,
+            name = useCase.name,
+            simpleName = useCase.simpleName
+        ).let {
+            when (it) {
+                is Result.Success -> CreateConversationResult(data = it.data)
+                is Result.Error -> CreateConversationResult(error = it.exception)
+            }
+        }
     }
 
     companion object {

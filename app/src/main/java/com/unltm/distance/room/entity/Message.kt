@@ -2,12 +2,14 @@ package com.unltm.distance.room.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 
 @Entity
 open class Message(
     @PrimaryKey
     open val id: String,
     open val conversationId: String,
+    @Expose(serialize = false, deserialize = false)
     open val content: String,
     open val from: String,
     open val createdAt: Long = 0,

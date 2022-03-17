@@ -27,12 +27,42 @@ class GlobalViewModel private constructor(
     private var _conversationsLive = MutableLiveData<GetConversationsResult>()
     val conversationsLive: LiveData<GetConversationsResult> get() = _conversationsLive
 
-    private var _messagesLive = MutableLiveData<Map<String, GetMessagesResult>>()
-    val messagesLive: LiveData<Map<String, GetMessagesResult>> get() = _messagesLive
+    /**
+     * When these are changed, the conversation livedata will update the lastMessage.
+     */
+    private var _messagesLive =
+        mutableMapOf<String, MutableLiveData<GetMessagesResult>>().onEach { (conId, liveData) ->
+            liveData.observeForever { result ->
+                result.data?.let { messages ->
+                    val conversations = _conversationsLive.value?.data?.toMutableList()
+                    if (conversations != null) {
+                        conversations.firstOrNull { con -> con.id == conId }?.also { conversation ->
+                            val copy = conversation.copy(
+                                lastMessageId = messages.last().id,
+                                lastMessageAt = messages.last().updateAt
+                            )
+                            conversations.remove(conversation)
+                            conversations.add(copy)
+                            viewModelScope.launch {
+                                _conversationsLive.value =
+                                    GetConversationsResult(data = conversations)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    val messagesLive: Map<String, LiveData<GetMessagesResult>> get() = _messagesLive
 
     private var _accountLive = MutableLiveData<List<User>>()
     val accountLive: LiveData<List<User>> get() = _accountLive
+    val currentUser: User? get() = accountLive.value?.firstOrNull()
 
+    /**
+     * Change the current user
+     * @param id userId
+     * @see accountLive
+     */
     fun changeCurrentAccount(id: String) {
         viewModelScope.launch {
             val allAccount = accountRepository.getCurrentUser()
@@ -51,22 +81,51 @@ class GlobalViewModel private constructor(
         }
     }
 
+    /**
+     * Get all my conversations from cache and server.
+     * @see conversationsLive
+     */
     fun getConversations() {
         viewModelScope.launch {
             _conversationsLive.value = conversationRepository.getMyConversations()
         }
     }
 
+    /**
+     * Get Messages from Cache and Server.
+     * Make sure invoke [registerConversation] before this.
+     * @param conId conversationId
+     * @throws IllegalArgumentException If the conversation has not been registered
+     * @see messagesLive
+     */
     fun getMessages(conId: String) {
         viewModelScope.launch {
-            val old = _messagesLive.value?.toMutableMap() ?: mutableMapOf()
-            old[conId] = messageRepository.getByConversationIdFromCache(conId)
-            _messagesLive.value = old
-            old[conId] = messageRepository.getByConversationIdFromServer(conId)
-            _messagesLive.value = old
+            requireNotNull(_messagesLive[conId])
+            _messagesLive[conId]!!.value = messageRepository.getByConversationIdFromCache(conId)
+            _messagesLive[conId]!!.value = messageRepository.getByConversationIdFromServer(conId)
         }
     }
 
+    /**
+     * Register to make sure messages and other notifies of the conversation could be observed.
+     * @param conId conversationId
+     */
+    fun registerConversation(conId: String) {
+        if (!_messagesLive.containsKey(conId)) {
+            _messagesLive[conId] = MutableLiveData()
+        }
+    }
+
+    fun unregisterConversation(conId: String) {
+        if (_messagesLive.containsKey(conId)) {
+            _messagesLive.remove(conId)
+        }
+    }
+
+    /**
+     * Get local accounts with sorted, the first one is the current user.
+     * @see accountLive
+     */
     fun getAccounts() {
         viewModelScope.launch {
             _accountLive.value = accountRepository.getCurrentUser()

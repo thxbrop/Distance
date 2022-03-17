@@ -8,7 +8,7 @@ import com.google.zxing.common.CharacterSetECI
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.unltm.distance.R
 import com.unltm.distance.application
-import com.unltm.distance.base.jvm.QRCodeUtil
+import com.unltm.distance.base.qrcode.Util
 import com.unltm.distance.ui.components.ceil.TextDrawable
 
 private val shapeBuilder = TextDrawable.builder().beginConfig().bold().endConfig()
@@ -52,7 +52,7 @@ fun buildQRCodeBitmap(
     margin: Int = 2,
     color_black: Int = Color.BLACK,
     color_white: Int = Color.WHITE,
-) = QRCodeUtil.createQRCodeBitmap(
+) = Util.createQRCodeBitmap(
     s,
     size,
     size,
