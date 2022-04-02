@@ -14,7 +14,7 @@ import com.unltm.distance.application
 import com.unltm.distance.base.contracts.downloadManager
 import com.unltm.distance.base.contracts.downloadManagerRequest
 import com.unltm.distance.base.contracts.isNotNull
-import com.unltm.distance.base.contracts.requireSdk
+import com.unltm.distance.base.contracts.requiresApi
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -105,13 +105,13 @@ object Files {
         title: String = System.currentTimeMillis().toString(),
         description: String? = null,
     ): Boolean {
-        return requireSdk(Build.VERSION_CODES.Q, {
+        return requiresApi(Build.VERSION_CODES.Q, {
             val insert = context.contentResolver.insert(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 ContentValues()
-            ) ?: return@requireSdk false
+            ) ?: return@requiresApi false
             context.contentResolver.openOutputStream(insert).use {
-                it ?: return@requireSdk false
+                it ?: return@requiresApi false
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
             }
             true
@@ -181,5 +181,4 @@ object Files {
             } else false
         }
     }
-
 }

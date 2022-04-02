@@ -1,7 +1,12 @@
 package com.unltm.distance.repository
 
+import com.unltm.distance.activity.edit.result.UpdateResult
+import com.unltm.distance.activity.login.result.GetRichUserResult
+import com.unltm.distance.activity.login.result.LoginResult
+import com.unltm.distance.activity.login.result.SignResult
 import com.unltm.distance.base.Result
 import com.unltm.distance.base.ServerException
+import com.unltm.distance.base.file.UploadProgress
 import com.unltm.distance.datasource.AccountDataSource
 import com.unltm.distance.datasource.AuthDataSource
 import com.unltm.distance.datasource.config.AccountConfig
@@ -9,10 +14,6 @@ import com.unltm.distance.datasource.config.AuthConfig
 import com.unltm.distance.room.entity.User
 import com.unltm.distance.storage.AccountStorage
 import com.unltm.distance.storage.AuthStorage
-import com.unltm.distance.ui.edit.result.UpdateResult
-import com.unltm.distance.ui.login.result.GetRichUserResult
-import com.unltm.distance.ui.login.result.LoginResult
-import com.unltm.distance.ui.login.result.SignResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -52,12 +53,34 @@ class AccountRepository private constructor(
         }
     }
 
+    suspend fun logoutAllAccount() {
+        authStorage.getAllAccount().forEach {
+            authStorage.removeAccount(it)
+        }
+    }
+
     suspend fun getCurrentUser(): List<User> {
         return authStorage.getAllAccount()
     }
 
+    @Deprecated("")
     suspend fun getRichInfo(user: User): GetRichUserResult {
         return when (val result = accountDataSource.getRichInfo(user)) {
+            is Result.Success -> {
+                val userRich = result.data
+                withContext(Dispatchers.IO) {
+                    accountStorage.saveAccount(userRich)
+                }
+                GetRichUserResult(success = userRich)
+            }
+            is Result.Error -> GetRichUserResult(
+                error = ServerException.NOT_FOUND_RICH_USER
+            )
+        }
+    }
+
+    suspend fun getRichInfo(userId: String): GetRichUserResult {
+        return when (val result = accountDataSource.getRichInfo(userId)) {
             is Result.Success -> {
                 val userRich = result.data
                 withContext(Dispatchers.IO) {
@@ -90,6 +113,11 @@ class AccountRepository private constructor(
             is Result.Error -> UpdateResult(error = result.exception)
         }
     }
+
+    suspend fun uploadHeadImage(
+        id: String,
+        base64: String
+    ): Result<UploadProgress> = accountDataSource.uploadHeadPicture(id, base64)
 
     companion object {
         val INSTANCE by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {

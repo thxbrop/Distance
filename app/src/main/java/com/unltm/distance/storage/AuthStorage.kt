@@ -16,7 +16,7 @@ class AuthStorage {
     }
 
     suspend fun getAllAccount(): List<User> {
-        return userDao.getAllUser()
+        return userDao.getAllUsers()
     }
 
     suspend fun getAccountById(id: String): User? {

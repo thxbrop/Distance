@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     app:layoutDescription="@xml/activity_chat_scene"
-    tools:context=".ui.chat.ChatActivity">
+    tools:context=".activity.chat.ChatActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/activity_chat_app_bar"
@@ -81,7 +81,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <com.unltm.distance.activity.chat.components.ChatEditText
             android:id="@+id/edittext"
             android:layout_width="0dp"
             android:layout_height="40dp"

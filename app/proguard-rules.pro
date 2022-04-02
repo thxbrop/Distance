@@ -19,3 +19,18 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# volley
+-keep class com.android.volley.** {*;}
+-keep class com.android.volley.toolbox.** {*;}
+-keep class com.android.volley.Response$* {*;}
+-keep class com.android.volley.Request$* {*;}
+-keep class com.android.volley.RequestQueue$* {*;}
+-keep class com.android.volley.toolbox.HurlStack$* {*;}
+-keep class com.android.volley.toolbox.ImageLoader$* {*;}
+-keep class org.apache.http.** {*;}
+
+-dontobfuscate
+-keepattributes *Annotation*
+-keepattributes Signature
+-keep class com.google.gson.** {*;}
+-keep class com.unltm.distance.room.entity.** {*;}

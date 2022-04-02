@@ -1,6 +1,6 @@
 package com.unltm.distance.datasource.gson
 
-import com.unltm.distance.ui.live.LivePreview
+import com.unltm.distance.activity.live.LivePreview
 
 data class GetLivePreview(
     val code: Int,

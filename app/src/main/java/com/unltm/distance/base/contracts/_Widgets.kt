@@ -87,6 +87,10 @@ fun TextView.setTextColorResource(@ColorRes resId: Int) {
     setTextColor(ContextCompat.getColor(context, resId))
 }
 
+fun View.setBackgroundColorRes(@ColorRes resId: Int) {
+    setBackgroundColor(ContextCompat.getColor(context, resId))
+}
+
 fun TextView.setTime(time: Long) {
     getFriendlyTimeSpanByNow(max(time, 0)).also { formatted ->
         formatted.split('-').also {

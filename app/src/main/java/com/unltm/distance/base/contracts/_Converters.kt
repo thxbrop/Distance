@@ -1,9 +1,11 @@
 package com.unltm.distance.base.contracts
 
 import android.content.ContentResolver
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.FileUtils
+import android.provider.MediaStore
 import android.webkit.MimeTypeMap
 import androidx.annotation.RequiresApi
 import com.unltm.distance.application
@@ -33,3 +35,5 @@ fun Uri.toFileQ(): File? =
                 }
         } else null
     } else null
+
+fun Uri.toBitmap(): Bitmap = MediaStore.Images.Media.getBitmap(application.contentResolver, this)

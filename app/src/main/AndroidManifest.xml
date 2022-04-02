@@ -37,22 +37,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".activity.login.LoginActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.conversation.ConversationActivity"
+            android:name=".activity.conversation.ConversationActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.chat.ChatActivity"
+            android:name=".activity.chat.ChatActivity"
             android:theme="@style/Theme.Chat" />
         <activity
-            android:name=".ui.account.AccountActivity"
+            android:name=".activity.account.AccountActivity"
             android:theme="@style/Theme.Information" />
-        <activity android:name=".ui.settings.SettingActivity" />
-        <activity android:name=".ui.music.MusicActivity" />
-        <activity android:name=".ui.live.reco.RecoActivity" />
-        <activity android:name=".ui.live.player.PlayerActivity" />
-        <activity android:name=".ui.edit.EditActivity" />
+        <activity android:name=".activity.settings.SettingActivity" />
+        <activity android:name=".activity.music.MusicActivity" />
+        <activity android:name=".activity.live.discovery.DiscoveryActivity" />
+        <activity android:name=".activity.live.player.PlayerActivity" />
+        <activity android:name=".activity.edit.EditActivity" />
+        <activity android:name=".activity.bubble.BubbleActivity"
+            android:theme="@style/Theme.Material3.Light.NoActionBar"
+            android:allowEmbedded="true"
+            android:resizeableActivity="true"/>
 
         <receiver
             android:name=".base.file.DownloaderBroadcastReceiver"

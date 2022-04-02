@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activity_user_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/activity_user_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/cd_headView"
+                android:scaleType="centerCrop"
+                android:src="@color/colorPrimary"
+                app:layout_constraintDimensionRatio="w,3:4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedCornerImageStyle_0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_user_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundSecondary"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/activity_user_header">
+
+            <include
+                android:id="@+id/activity_account_name"
+                layout="@layout/item_info_header" />
+
+            <include
+                android:id="@+id/activity_account_phone"
+                layout="@layout/item_info"
+                tools:ignore="DuplicateIncludedIds" />
+
+            <include
+                android:id="@+id/activity_account_description"
+                layout="@layout/item_info_footer"
+                tools:ignore="DuplicateIncludedIds" />
+
+            <include
+                android:id="@+id/activity_account_notify"
+                layout="@layout/item_setting_info_header"
+                tools:ignore="DuplicateIncludedIds" />
+
+            <include
+                android:id="@+id/activity_account_safe"
+                layout="@layout/item_setting_info" />
+
+            <include
+                android:id="@+id/activity_account_theme"
+                layout="@layout/item_setting_info" />
+
+            <include
+                android:id="@+id/activity_account_cache"
+                layout="@layout/item_setting_info"
+                tools:ignore="DuplicateIncludedIds" />
+
+            <include
+                android:id="@+id/activity_account_proxy"
+                layout="@layout/item_setting_info"
+                tools:ignore="DuplicateIncludedIds" />
+
+            <include
+                android:id="@+id/activity_account_logout"
+                layout="@layout/item_setting_info_footer"
+                tools:ignore="DuplicateIncludedIds" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/activity_user_floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_2xl"
+            android:contentDescription="@string/cd_edit"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:backgroundTint="@color/colorPrimary"
+            app:borderWidth="4dp"
+            app:elevation="0dp"
+            app:fabSize="auto"
+            app:layout_constraintBottom_toTopOf="@id/activity_user_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_user_header"
+            app:tint="@color/background" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+

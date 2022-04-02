@@ -12,18 +12,18 @@ import com.unltm.distance.R
 import com.unltm.distance.R.color.*
 import com.unltm.distance.R.drawable.*
 import com.unltm.distance.R.string.*
-import com.unltm.distance.adapter.ExpansionAdapter
+import com.unltm.distance.activity.chat.ExpansionAdapter
+import com.unltm.distance.activity.edit.EditActivity
 import com.unltm.distance.adapter.bottomsheet.SettingItem
 import com.unltm.distance.base.contracts.requirePermission
-import com.unltm.distance.base.contracts.showToast
+import com.unltm.distance.base.contracts.toast
 import com.unltm.distance.base.qrcode.Converter
 import com.unltm.distance.components.dialog.VoiceDialog
 import com.unltm.distance.room.entity.User
-import com.unltm.distance.ui.components.dialog.image.ImageDialog
-import com.unltm.distance.ui.edit.EditActivity
+import com.unltm.distance.ui.dialog.image.ImageDialog
 
 object Items {
-    fun getExpansionList(
+    fun expansionItems(
         context: Context,
         permissionLauncher: ActivityResultLauncher<String>,
         launcher: ActivityResultLauncher<String>,
@@ -95,7 +95,7 @@ object Items {
 
 
     @SuppressLint("MissingPermission")
-    fun getPhoneSubmenu(
+    fun phoneItems(
         activity: AppCompatActivity,
         requestPermissionLauncher: ActivityResultLauncher<String>,
         user: User,
@@ -114,7 +114,7 @@ object Items {
             },
             SettingItem(ic_round_content_copy_24, cd_copy) {
                 ClipboardUtils.copyText(user.phoneNumber.toString())
-                activity.showToast(success_copy)
+                activity.toast(success_copy)
             },
             SettingItem(ic_baseline_share_24, cd_share, badge_alpha),
         )
@@ -124,7 +124,8 @@ object Items {
         return mutableListOf
     }
 
-    fun getAccountSubMenu(
+
+    fun accountItems(
         activity: AppCompatActivity,
         fragmentManager: FragmentManager,
         user: User
@@ -142,5 +143,6 @@ object Items {
 //            it.removeAt(0)
 //        }
     }
+
 
 }

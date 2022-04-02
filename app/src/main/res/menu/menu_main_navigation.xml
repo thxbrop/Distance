@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <group
+        android:id="@+id/accounts"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_main_navigation_add"
+            android:checkable="true"
+            android:icon="@drawable/ic_baseline_add_24"
+            android:title="@string/menu_main_add" />
+    </group>
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_main_navigation_notification"

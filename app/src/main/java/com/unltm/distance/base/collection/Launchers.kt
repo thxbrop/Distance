@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 
 object Launchers {
+    //context(ComponentActivity)
     fun selectMediaLauncher(activity: ComponentActivity, block: (Uri) -> Unit) =
         activity.registerForActivityResult(
             ActivityResultContracts.GetContent()

@@ -1,6 +1,8 @@
 package com.unltm.distance.base.contracts
 
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.util.Base64
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -9,7 +11,8 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.unltm.distance.R
 import com.unltm.distance.application
 import com.unltm.distance.base.qrcode.Util
-import com.unltm.distance.ui.components.ceil.TextDrawable
+import com.unltm.distance.ui.ceil.TextDrawable
+import java.io.ByteArrayOutputStream
 
 private val shapeBuilder = TextDrawable.builder().beginConfig().bold().endConfig()
 
@@ -62,3 +65,11 @@ fun buildQRCodeBitmap(
     color_black,
     color_white
 )!!
+
+fun Bitmap.toBase64(): String {
+    val stream = ByteArrayOutputStream()
+    compress(Bitmap.CompressFormat.JPEG, 100, stream)
+    stream.flush()
+    stream.close()
+    return Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT)
+}

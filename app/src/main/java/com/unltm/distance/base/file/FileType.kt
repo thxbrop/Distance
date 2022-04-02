@@ -1,6 +1,8 @@
 package com.unltm.distance.base.file
 
+import android.os.Build
 import android.os.Environment
+import androidx.annotation.RequiresApi
 
 sealed class FileType(val environment: String) {
     object Music : FileType(Environment.DIRECTORY_MUSIC)
@@ -12,4 +14,6 @@ sealed class FileType(val environment: String) {
     object Documents : FileType(Environment.DIRECTORY_DOCUMENTS)
     object Downloads : FileType(Environment.DIRECTORY_DOWNLOADS)
     object DCIM : FileType(Environment.DIRECTORY_DCIM)
+    @RequiresApi(Build.VERSION_CODES.S)
+    object Record : FileType(Environment.DIRECTORY_RECORDINGS)
 }

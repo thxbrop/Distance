@@ -4,13 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.blankj.utilcode.util.ToastUtils
+import com.google.android.material.snackbar.Snackbar
 import com.unltm.distance.R
 import com.unltm.distance.base.file.FileType
 import okhttp3.*
@@ -23,7 +26,8 @@ import java.io.Serializable
 
 fun Context.requirePermission(
     launcher: ActivityResultLauncher<String>,
-    permission: String, lazy: (() -> Unit)? = null,
+    permission: String,
+    lazy: (() -> Unit)? = null,
 ) {
     if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
         launcher.launch(permission)
@@ -44,7 +48,7 @@ inline fun <reified T : Activity> Context.startActivityWithString(bundle: Pair<S
     (this as Activity).overridePendingTransition(R.anim.slide_from_right, R.anim.popup_out)
 }
 
-fun Context.showToast(@StringRes stringRes: Int, resId: Int = R.drawable.live_state_primary) {
+fun Context.toast(@StringRes stringRes: Int, resId: Int = R.drawable.live_state_primary) {
     ToastUtils.make()
         .setMode(ToastUtils.MODE.DARK)
         .setDurationIsLong(true)
@@ -52,12 +56,45 @@ fun Context.showToast(@StringRes stringRes: Int, resId: Int = R.drawable.live_st
         .show(getString(stringRes))
 }
 
-fun Context.showErrorToast(@StringRes stringRes: Int) {
-    showToast(stringRes, R.drawable.live_state_warn)
+fun Context.errorToast(@StringRes stringRes: Int) {
+    toast(stringRes, R.drawable.live_state_warn)
 }
 
-fun Context.showErrorToast(s: String?) {
-    showToast(s, R.drawable.live_state_warn)
+fun Context.errorToast(s: String?) {
+    toast(s, R.drawable.live_state_warn)
+}
+
+fun Fragment.errorToast(@StringRes stringRes: Int) {
+    context?.errorToast(stringRes)
+}
+
+fun Fragment.errorToast(s: String?) {
+    context?.errorToast(s)
+}
+
+fun Activity.snackBar(
+    view: View,
+    @StringRes stringRes: Int,
+    duration: Int = Snackbar.LENGTH_SHORT
+) {
+    snackBar(view, getString(stringRes), duration)
+}
+
+fun Fragment.snackBar(
+    @StringRes stringRes: Int,
+    duration: Int = Snackbar.LENGTH_SHORT
+) {
+    snackBar(getString(stringRes), duration)
+}
+
+fun Activity.snackBar(view: View, s: String?, duration: Int = Snackbar.LENGTH_SHORT) {
+    requireNotNull(s)
+    Snackbar.make(view, s, duration).show()
+}
+
+fun Fragment.snackBar(s: String?, duration: Int = Snackbar.LENGTH_SHORT) {
+    requireNotNull(s)
+    Snackbar.make(requireView(), s, duration).show()
 }
 
 
@@ -96,7 +133,15 @@ fun Context.download(uri: String?, saveAs: FileType, callback: (Throwable?) -> U
 }
 
 
-fun showToast(stringRes: CharSequence?, resId: Int = R.drawable.live_state_primary) {
+fun toast(c: CharSequence?, resId: Int = R.drawable.live_state_primary) {
+    ToastUtils.make()
+        .setMode(ToastUtils.MODE.DARK)
+        .setDurationIsLong(true)
+        .setLeftIcon(resId)
+        .show(c)
+}
+
+fun toast(stringRes: Int, resId: Int = R.drawable.live_state_primary) {
     ToastUtils.make()
         .setMode(ToastUtils.MODE.DARK)
         .setDurationIsLong(true)

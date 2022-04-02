@@ -3,8 +3,8 @@ package com.unltm.distance.repository
 import com.unltm.distance.base.Result
 import com.unltm.distance.datasource.MessageDataSource
 import com.unltm.distance.storage.MessageStorage
-import com.unltm.distance.ui.chat.result.GetMessageResult
-import com.unltm.distance.ui.chat.result.GetMessagesResult
+import com.unltm.distance.activity.chat.result.GetMessageResult
+import com.unltm.distance.activity.chat.result.GetMessagesResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.unltm.distance.ui.components.ceil.button.ShutterButton
+    <com.unltm.distance.ui.ceil.button.ShutterButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

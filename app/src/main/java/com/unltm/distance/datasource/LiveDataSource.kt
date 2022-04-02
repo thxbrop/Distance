@@ -8,6 +8,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.blankj.utilcode.util.GsonUtils
+import com.unltm.distance.activity.live.LivePreview
 import com.unltm.distance.application
 import com.unltm.distance.base.Result
 import com.unltm.distance.base.ServerException
@@ -15,7 +16,6 @@ import com.unltm.distance.datasource.gson.GetLivePreview
 import com.unltm.distance.datasource.gson.GetLiveState
 import com.unltm.distance.datasource.gson.GetRealUrl
 import com.unltm.distance.datasource.gson.Platform
-import com.unltm.distance.ui.live.LivePreview
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.nio.charset.Charset
 import kotlin.coroutines.resume
@@ -27,7 +27,7 @@ class LiveDataSource(
         private const val TAG = "LiveDataSource"
         private const val NOT_ALIVE = "未开播或房间不存在"
         private const val START_INDEX = 0
-        private const val DEFAULT_KEY_WORD = "overwatch"
+        const val DEFAULT_KEY_WORD = "overwatch"
     }
 
     private val queue = Volley.newRequestQueue(application.applicationContext)
