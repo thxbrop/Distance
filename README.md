@@ -1,8 +1,5 @@
 ## Distance 原生Android开源项目
 
-该项目的是《初学者入门后的进阶》系列的一部分内容
-> Distance系列项目立志于快捷搭建私有IM系统
-
 ### 项目技术栈
   - Kotlin Coroutine
   - Kotlin Flow
