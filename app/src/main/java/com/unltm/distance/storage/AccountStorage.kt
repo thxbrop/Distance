@@ -16,7 +16,7 @@ class AccountStorage {
     }
 
     suspend fun getAllAccount(): List<User> {
-        return userRichDao.getAllUser()
+        return userRichDao.getAllUsers()
     }
 
     suspend fun getAccountById(id: String): User? {

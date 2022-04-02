@@ -14,7 +14,6 @@ import com.unltm.distance.base.contracts.setTextResource
 
 class BottomSheetAdapter :
     ListAdapter<SettingItem, BottomSheetAdapter.ViewHolder>(DIFF) {
-
     private var onItemClickListener: OnItemClickListener? = null
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

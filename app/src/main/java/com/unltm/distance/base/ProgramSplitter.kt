@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import com.unltm.distance.base.contracts.startActivity
 import com.unltm.distance.repository.AccountRepository
-import com.unltm.distance.ui.conversation.ConversationActivity
-import com.unltm.distance.ui.login.LoginActivity
+import com.unltm.distance.activity.conversation.ConversationActivity
+import com.unltm.distance.activity.login.LoginActivity
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 

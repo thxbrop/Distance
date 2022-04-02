@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="64dp">
 
-            <com.unltm.distance.ui.components.wave.AXWaveView
+            <com.unltm.distance.ui.wave.AXWaveView
                 android:id="@+id/wave"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

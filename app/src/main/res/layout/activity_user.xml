@@ -28,7 +28,7 @@
             app:shapeAppearanceOverlay="@style/roundedCornerImageStyle_0"
             tools:srcCompat="@color/colorPrimary" />
 
-        <com.unltm.distance.components.ceil.LoadingProgress
+        <com.unltm.distance.ui.ceil.LoadingProgress
             android:id="@+id/loadingProgress"
             android:layout_width="60dp"
             android:layout_height="60dp"

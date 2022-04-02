@@ -1,23 +1,25 @@
 package com.unltm.distance.datasource.config
 
+import androidx.annotation.Keep
 import com.unltm.distance.base.contracts.gson
 import com.unltm.distance.room.entity.Message
 import kotlinx.coroutines.suspendCancellableCoroutine
 
+@Keep
 class MessageConfig private constructor() : BaseConfig() {
     suspend fun getById(id: String) =
         suspendCancellableCoroutine<Message> {
-            it.resumeWithRequestUrl("$messageUrl?$KEY_ID=$id")
+            it.resumeStringRequest("$messageUrl?$KEY_ID=$id")
         }
 
     suspend fun getByConversationId(id: String) =
         suspendCancellableCoroutine<List<Message>> {
-            it.resumeWithRequestUrl("$messageUrl?$KEY_CONVERSATION_ID=$id")
+            it.resumeStringRequest("$messageUrl?$KEY_CONVERSATION_ID=$id")
         }
 
     suspend fun sendMessage(userId: String, conId: String, message: Message) =
         suspendCancellableCoroutine<List<Message>> {
-            it.resumeWithRequestUrl(
+            it.resumeStringRequest(
                 "$sendMessageUrl?${KEY_USER_ID}=$$userId&$KEY_CONVERSATION_ID=$conId&$KEY_CONTENT=${
                     gson.toJson(message)
                 }"

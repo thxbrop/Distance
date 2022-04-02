@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.unltm.distance.ui.components.ceil.Switch
+    <com.unltm.distance.ui.ceil.Switch
         android:id="@+id/checkbox"
         android:layout_width="48dp"
         android:layout_height="48dp"

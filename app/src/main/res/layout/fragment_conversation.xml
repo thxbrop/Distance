@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/activity_main_fresh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/toolbar_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/toolbar">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_main_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundSecondary"
+                android:overScrollMode="never"
+                app:fastScrollEnabled="true"
+                app:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+                app:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+                app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+                app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
+                tools:listitem="@layout/item_conversation" />
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_l"
+            android:backgroundTint="@color/floating_background"
+            android:contentDescription="@string/cd_create_conversation"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:tooltipText="@string/cd_create_conversation"
+            app:borderWidth="0dp"
+            app:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/background"
+            tools:targetApi="o" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.unltm.distance.components.layout.MaterialNavigationView
+        android:id="@+id/activity_main_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/backgroundSecondary"
+        android:fitsSystemWindows="true"
+        android:overScrollMode="never"
+        app:itemStyle="rounded_rectangle"
+        app:menu="@menu/menu_main_navigation" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

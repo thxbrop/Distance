@@ -1,13 +1,15 @@
 package com.unltm.distance.datasource.config
 
+import androidx.annotation.Keep
 import com.unltm.distance.base.contracts.gson
 import com.unltm.distance.room.entity.Conversation
 import kotlinx.coroutines.suspendCancellableCoroutine
 
+@Keep
 class ConversationConfig private constructor() : BaseConfig() {
     suspend fun getById(id: String) =
         suspendCancellableCoroutine<Conversation> {
-            it.resumeWithRequestUrl("$queryUrl?$KEY_ID=$id")
+            it.resumeStringRequest("$queryUrl?$KEY_ID=$id")
         }
 
     suspend fun create(
@@ -17,7 +19,7 @@ class ConversationConfig private constructor() : BaseConfig() {
         simpleName: String = name
     ) = suspendCancellableCoroutine<Conversation> {
         val invitedIdsGson = gson.toJson(invitedIds)
-        it.resumeWithRequestUrl(
+        it.resumeStringRequest(
             "$createUrl?" +
                     "$KEY_USER_ID=$userId&" +
                     "$KEY_INVITED_IDS=$invitedIdsGson&" +

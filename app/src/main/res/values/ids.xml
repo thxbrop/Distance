@@ -6,4 +6,9 @@
     <item name="id_issue_editor_edittext" type="id" />
     <item name="id_issue_editor_markdown" type="id" />
     <item name="id_issue_editor_submit" type="id" />
+    <item name="account_1" type="id" />
+    <item name="account_2" type="id" />
+    <item name="account_3" type="id" />
+    <item name="account_4" type="id" />
+    <item name="account_5" type="id" />
 </resources>

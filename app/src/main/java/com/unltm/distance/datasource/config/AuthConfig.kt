@@ -1,8 +1,10 @@
 package com.unltm.distance.datasource.config
 
+import androidx.annotation.Keep
 import com.unltm.distance.room.entity.User
 import kotlinx.coroutines.suspendCancellableCoroutine
 
+@Keep
 class AuthConfig private constructor() : BaseConfig() {
     companion object {
         private val uri: String get() = baseUrl + "auth/"
@@ -18,12 +20,12 @@ class AuthConfig private constructor() : BaseConfig() {
 
     suspend fun login(email: String, password: String) =
         suspendCancellableCoroutine<User> {
-            it.resumeWithRequestUrl("$loginUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password")
+            it.resumeStringRequest("$loginUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password")
         }
 
     suspend fun sign(email: String, password: String) =
         suspendCancellableCoroutine<User> {
-            it.resumeWithRequestUrl("$signUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password")
+            it.resumeStringRequest("$signUrl?$KEY_EMAIL=$email&$KEY_PASSWORD=$password")
         }
 
 }
